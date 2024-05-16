@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+body{
+    background-image: url(/assets/gedung-sipil2.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin: 0;
+}
+
+.lupa-pass, .ubah-pass{
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+}
+
+.gradient-login .bg-login{
+    width: 610px;
+    height: 664px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.logo .logo-jti{
+    position: absolute;
+    z-index: 1;
+    top: 10px;;
+    left: 30px;
+    width: 55px;
+    height: 50px;
+}
+
+.vector .vector-login{
+    position: absolute;
+    z-index: 2;
+    box-sizing: border-box;
+    padding-top: 175px;
+    margin-left: 100px;
+    width: 350px;
+}
+
+.main-content{
+    margin-top: 30%;
+}
+
+.main-content h1{
+    text-align: center;
+    font-size: 60px;
+    letter-spacing: 3px;
+}
+
+.main-content input{
+    width: 65%;
+    height: 45px;
+    margin: auto;
+    border: 1px solid black;
+    opacity: 0.6;
+}
+
+.main-content .btn{
+    margin-left: 120px;
+    background-color: #3F47F1;
+    width: 300px;
+    color: white;
+}
