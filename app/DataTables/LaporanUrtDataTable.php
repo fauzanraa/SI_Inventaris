@@ -32,7 +32,9 @@ class LaporanUrtDataTable extends DataTable
      */
     public function query(PinjamanRuangan $model): QueryBuilder
     {
-        return $model->newQuery();
+        return $model->newQuery()
+                        ->join('pengajuan_pinjamans', 'pinjaman_ruangans.pengajuan_pinjaman_id', '=', 'pengajuan_pinjamans.id' )
+                        ->select('pinjaman_ruangans.*', 'pengajuan_pinjamans.tanggal_mulai as tanggal_mulai', 'pengajuan_pinjamans.tanggal_selesai as tanggal_selesai');
     }
 
     /**
@@ -63,13 +65,10 @@ class LaporanUrtDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::computed('action')
-                  ->exportable(false)
-                  ->printable(false)
-                  ->width(60)
-                  ->addClass('text-center'),
             Column::make('id'),
             Column::make('tanggal_approval'),
+            Column::make('tanggal_mulai'),
+            Column::make('tanggal_selesai'),
         ];
     }
 

@@ -44,7 +44,12 @@ table {
 	border-spacing: 0;
 }
 
-.pengajuan{
+body{
+    background: url(/assets/bg-user.png);
+    background-repeat: no-repeat;
+}
+
+.tandaTerima{
     font-family: "Poppins", sans-serif;
     font-weight: 500;
     font-style: normal;
@@ -57,8 +62,9 @@ table {
 
 .top-bar{
     width: 100%;
-    background-color: #363DDC;
+    background-color: #41439A;
     position: fixed;
+    top: 0;
     z-index: 5;
     color: white;
 }
@@ -75,7 +81,7 @@ table {
 }
 
 .link ul{
-    margin-left: 350px;
+    margin-left: 390px;
     margin-top: 10px;
 }
 
@@ -85,5 +91,13 @@ table {
 
 .avatar .avatar-user{
     height: 40px;
-    margin-left: 410px;
+    margin-left: 350px;
+}
+
+.content{
+    background: #d9d9d9;
+    margin-top: 100px;
+    width: 70%;
+    margin-left: 200px;
+    padding: 20px 20px ;
 }

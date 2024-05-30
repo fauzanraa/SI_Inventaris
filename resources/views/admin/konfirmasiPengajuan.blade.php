@@ -26,7 +26,7 @@
                     <a href="{{ url('/level')}}" class="nav-link ">
                         <p>
                             <i class="nav-icon fas fa-solid fa-calendar"></i>
-                            Jadwal
+                            Ruangan
                         </p>
                 </li>
                 <li class="nav-item">

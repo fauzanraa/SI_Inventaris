@@ -23,7 +23,14 @@ class PengajuanUrtDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('action', 'pengajuanurt.action')
+            ->addColumn('action', function ($pinjaman){
+                    if($pinjaman->status_urt == 'Menunggu'){
+                    $btn  = '
+                        <a href="'.url('urt/cekPengajuan/' . $pinjaman->user_id. '/konfirmasi').'" class="btn btn-info btn-sm">Konfirmasi</a> 
+                    '; 
+                    return $btn;
+                }
+            })
             ->setRowId('id');
     }
 
@@ -63,19 +70,17 @@ class PengajuanUrtDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            // Column::computed('action')
-            //       ->exportable(false)
-            //       ->printable(false)
-            //       ->width(60)
-            //       ->addClass('text-center'),
             Column::make('id'),
             Column::make('user_id'),
-            Column::make('tanggal_pinjam'),
+            Column::make('tanggal_mulai'),
             Column::make('tanggal_selesai'),
-            Column::make('dokumen'),
+            Column::make('dokumen_pendukung'),
             Column::make('status_urt'),
-            Column::make('created_at'),
-            Column::make('updated_at'),
+            Column::computed('action')
+                  ->exportable(false)
+                  ->printable(false)
+                  ->width(60)
+                  ->addClass('text-center'),
         ];
     }
 

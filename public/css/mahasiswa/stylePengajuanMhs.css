@@ -44,6 +44,11 @@ table {
 	border-spacing: 0;
 }
 
+body{
+    background: url('/assets/bg-user.png');
+    background-size: contain;
+}
+
 .pengajuan{
     font-family: "Poppins", sans-serif;
     font-weight: 500;
@@ -57,8 +62,9 @@ table {
 
 .top-bar{
     width: 100%;
-    background-color: #363DDC;
+    background-color: #41439A;
     position: fixed;
+    top: 0;
     z-index: 5;
     color: white;
 }
@@ -75,7 +81,7 @@ table {
 }
 
 .link ul{
-    margin-left: 350px;
+    margin-left: 390px;
     margin-top: 10px;
 }
 
@@ -85,10 +91,38 @@ table {
 
 .avatar .avatar-user{
     height: 40px;
-    margin-left: 410px;
+    margin-left: 350px;
 }
 
 .main-content{
-    background-color: aqua;
+    background-color: #d9d9d9;
+    margin-top: 100px;
+    width: 98%;
+    vertical-align: middle;
+    margin-left: 20px;
+    padding: 20px 20px;
+    filter: drop-shadow(8px 10px 4px black);
+}
+
+.pengajuan-image img{
     position: relative;
+    height: 530px;
+    width: 95%;
+}
+
+.pengajuan-inputan{
+    display: inline-block;
+}
+
+.kembali {
+    display: inline-block;
+}
+
+.kembali a{
+    text-decoration: none;
+}
+
+.pilih-ruangan select{
+    width: 50%;
+    height: 38px;
 }

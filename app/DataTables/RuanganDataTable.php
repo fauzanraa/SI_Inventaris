@@ -21,8 +21,15 @@ class RuanganDataTable extends DataTable
      */
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
+        $ruangans = Ruangan::all();
         return (new EloquentDataTable($query))
-            ->addColumn('action', 'ruangan.action')
+            ->addColumn('action', function ($ruangan){
+                    $btn  = 
+                    '<form class="d-inline-block" method="POST" action="'. url('admin/ruangan/'.$ruangan->id).'">'
+                    . csrf_field() . method_field('DELETE') .  
+                    '<button type="submit" class="btn btn-danger btn-sm" onclick="return confirm(\'Apakah Anda yakin menghapus data ini?\');"><i class="fa-solid fa-trash"></i></button></form>';       
+                    return $btn;
+            })
             ->setRowId('id');
     }
 
@@ -62,12 +69,14 @@ class RuanganDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::make('id'),
             Column::make('kode'),
             Column::make('nama'),
             Column::make('lantai'),
-            Column::make('created_at'),
-            Column::make('updated_at'),
+            Column::computed('action')
+                  ->exportable(false)
+                  ->printable(false)
+                  ->width(60)
+                  ->addClass('text-center'),
         ];
     }
 

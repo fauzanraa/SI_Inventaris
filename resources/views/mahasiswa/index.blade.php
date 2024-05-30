@@ -33,29 +33,78 @@
                 <div class="text-hero">
                     <h1>Butuh Ruangan Siap Pakai <br> Di Kampus ?</h1>
                     <p>
-                    Pinjam ruang fasilitas kampus untuk kegiatan kemahasiswaan dengan mudah. Kamu juga bisa cari dan cek
-                    ketersediaan ruangan di kolom search dibawah ini.</p>
+                    Pinjam ruang fasilitas kampus untuk kegiatan kemahasiswaan dengan mudah. Kamu juga bisa cari dan 
+                    <br>cek ketersediaan ruangan di kolom search dibawah ini.</p>
                 </div>
                 <div class="search-hero">
-                    <form>
+                    <form action="{{route('cariRuangan')}}" method="GET" enctype="multipart/form-data">
+                        {{ csrf_field() }}
                         <div class="mb-3">
-                            <input type="text" class="form-control" id="search" placeholder="Cari Ruangan">
+                            <input type="text" class="form-control" id="search" name="nama_ruangan" placeholder="Cari Ruangan">
+                            <button type="submit" class="btn btn-primary" hidden>Submit</button>
                         </div>
                     </form>
                 </div>
-                <img src="/assets/bg-user.png" alt="bg-user" class="bg-user">
+                <img src="/assets/hero-user.png" alt="bg-user" class="bg-user">
             </div>   
         </div>
 
         <div class="content">
             <div class="photo-class">
-                <img src="/assets/kelas/kelas1.png" alt="kelas" class="kelas1">
-                <img src="/assets/kelas/kelas1.png" alt="kelas" class="kelas1">
-                <img src="/assets/kelas/kelas1.png" alt="kelas" class="kelas1">
-                <img src="/assets/kelas/kelas1.png" alt="kelas" class="kelas1">
-                <img src="/assets/kelas/kelas1.png" alt="kelas" class="kelas1">
-                <img src="/assets/kelas/kelas1.png" alt="kelas" class="kelas1">
-                <img src="/assets/kelas/kelas1.png" alt="kelas" class="kelas1">
+                <div class="item">
+                    <img src="/assets/kelas/kelas1.png" alt="kelas" class="kelas1"> 
+                </div>
+                <div class="item">
+                    <img src="/assets/kelas/kelas1.png" alt="kelas" class="kelas1"> 
+                </div>
+                <div class="item">
+                    <img src="/assets/kelas/kelas1.png" alt="kelas" class="kelas1"> 
+                </div>
+                <div class="item">
+                    <img src="/assets/kelas/kelas1.png" alt="kelas" class="kelas1"> 
+                </div>
+                <div class="item">
+                    <img src="/assets/kelas/kelas1.png" alt="kelas" class="kelas1"> 
+                </div>
+                <div class="item">
+                    <img src="/assets/kelas/kelas1.png" alt="kelas" class="kelas1"> 
+                </div>
+                <div class="item">
+                    <img src="/assets/kelas/kelas1.png" alt="kelas" class="kelas1"> 
+                </div>
+                <div class="item">
+                    <img src="/assets/kelas/kelas1.png" alt="kelas" class="kelas1"> 
+                </div>
+                <div class="item">
+                    <img src="/assets/kelas/kelas1.png" alt="kelas" class="kelas1"> 
+                </div>
+                <div class="item">
+                    <img src="/assets/kelas/kelas1.png" alt="kelas" class="kelas1"> 
+                </div>
+                <div class="item">
+                    <img src="/assets/kelas/kelas1.png" alt="kelas" class="kelas1"> 
+                </div>
+                <div class="item">
+                    <img src="/assets/kelas/kelas1.png" alt="kelas" class="kelas1"> 
+                </div>
+                <div class="item">
+                    <img src="/assets/kelas/kelas1.png" alt="kelas" class="kelas1"> 
+                </div>
+                <div class="item">
+                    <img src="/assets/kelas/kelas1.png" alt="kelas" class="kelas1"> 
+                </div>
+                <div class="item">
+                    <img src="/assets/kelas/kelas1.png" alt="kelas" class="kelas1"> 
+                </div>
+                <div class="item">
+                    <img src="/assets/kelas/kelas1.png" alt="kelas" class="kelas1"> 
+                </div>
+                <div class="item">
+                    <img src="/assets/kelas/kelas1.png" alt="kelas" class="kelas1"> 
+                </div>
+                <div class="item">
+                    <img src="/assets/kelas/kelas1.png" alt="kelas" class="kelas1"> 
+                </div>
             </div>
             <div class="watch-more mt-4" >
                 <a href="">Lihat lebih banyak</a>
@@ -64,28 +113,30 @@
                 <h1>Apa Ruangan Ini Tersedia ?</h1>
                 <div class="input-check">
                     <div class="row">
-                        <form>
-                        <div class="ruangan">
-                            <div class="mb-3">
-                                <label for="ruangan" class="form-label">Ruangan</label>
-                                <input type="text" class="form-control" id="ruangan" placeholder="Pilih Ruangan">
+                        <form action="{{route('cariRuangan')}}" method="GET" enctype="multipart/form-data">
+                            {{ csrf_field() }}
+                            {{-- <div class="ruangan">
+                                <div class="mb-3">
+                                    <label for="ruangan" class="form-label">Ruangan</label>
+                                    <input type="text" class="form-control" name="ruangan" id="ruangan" placeholder="Pilih Ruangan">
+                                </div>
+                            </div> --}}
+                            <div class="tanggal_mulai">
+                                <div class="mb-3">
+                                    <label for="tanggal_mulai" class="form-label">Tanggal Mulai</label>
+                                    <input type="date" name="tanggal_mulai" class="form-control">
+                                </div>
                             </div>
-                        </div>
-                        <div class="waktu">
-                            <div class="mb-3">
-                                <label for="waktu" class="form-label">Waktu</label>
-                                <input type="text" class="form-control" id="ruangan" placeholder="Pilih Ruangan">
+                            <div class="tanggal_selesai">
+                                <div class="mb-3">
+                                    <label for="tanggal_selesai" class="form-label">Tanggal Selesai</label>
+                                    <input type="date" name="tanggal_selesai" class="form-control">
+                                </div>
                             </div>
-                        </div>
-                        <div class="tanggal">
-                            <div class="mb-3">
-                                <label for="tanggal" class="form-label">Tanggal</label>
-                                <input type="text" class="form-control" id="ruangan" placeholder="Pilih Ruangan">
+                            <div class="submit-check">
+                                <button type="submit" class="btn btn-primary">Submit</button>
                             </div>
-                        </div>
-                        <div class="submit-check">
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </div>
+                            {{-- <br><span>*boleh mengisi ruangan/tanggal saja</span> --}}
                         </form>        
                     </div>
                 </div>
@@ -99,12 +150,19 @@
                         </div>
                         <div class="col-lg-6">
                             <p>
-                                1. Pastikan Anda Sudah Mengecek Ketersedian Ruangan <br>
-                                2. Pastikan Anda Sudah Login Terlebih dahulu <br>
-                                1. Pastikan Anda Sudah Login Terlebih dahulu <br>
-                                1. Pastikan Anda Sudah Login Terlebih dahulu <br>
-                                1. Pastikan Anda Sudah Login Terlebih dahulu <br>
-                                1. Pastikan Anda Sudah Login Terlebih dahulu <br>
+                                1. Pastikan anda sudah mengecek ketersedian ruangan <br>
+                                2. Jika sudah menemukan ruangan yang ingin dipinjam, silahkan 
+                                <br> akses link berikut  <br>
+                                3. Isikan dokumen yang terdapat pada link tersebut <br>
+                                4. Lalu pergi ke halaman pengajuan <br>
+                                5. Nanti akan muncul form pengajuan, isi semua form sesuai 
+                                <br> pengajuan yang dilakukan. Pilih ajukan jika pengisian 
+                                <br> form sudah selesai <br>
+                                6. Tunggu hingga pengajuan dikonfirmasi oleh pihak Admin 
+                                <br> dan Urusan Rumah Tangga <br>
+                                7. Cek pengajuan ke halaman tanda terima, jika pengajuan 
+                                <br> dikonfirmasi cetak tanda terima lalu berikan kepada pihak OB 
+                                <br> untuk menggunakan kelas
                             </p>
                         </div>
                     </div>

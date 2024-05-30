@@ -32,7 +32,9 @@ class LaporanAdminDataTable extends DataTable
      */
     public function query(PinjamanRuangan $model): QueryBuilder
     {
-        return $model->newQuery();
+        return $model->newQuery()
+                        ->join('pengajuan_pinjamans', 'pinjaman_ruangans.pengajuan_pinjaman_id', '=', 'pengajuan_pinjamans.id' )
+                        ->select('pinjaman_ruangans.*', 'pengajuan_pinjamans.tanggal_mulai as tanggal_mulai', 'pengajuan_pinjamans.tanggal_selesai as tanggal_selesai');
     }
 
     /**
@@ -65,6 +67,8 @@ class LaporanAdminDataTable extends DataTable
         return [
             Column::make('id'),
             Column::make('tanggal_approval'),
+            Column::make('tanggal_mulai'),
+            Column::make('tanggal_selesai'),
         ];
     }
 

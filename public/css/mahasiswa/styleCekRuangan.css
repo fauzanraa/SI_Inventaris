@@ -57,8 +57,9 @@ table {
 
 .top-bar{
     width: 100%;
-    background-color: #363DDC;
+    background-color: #41439A;
     position: fixed;
+    top: 0;
     z-index: 5;
     color: white;
 }
@@ -75,7 +76,7 @@ table {
 }
 
 .link ul{
-    margin-left: 350px;
+    margin-left: 390px;
     margin-top: 10px;
 }
 
@@ -85,5 +86,82 @@ table {
 
 .avatar .avatar-user{
     height: 40px;
-    margin-left: 410px;
+    margin-left: 350px;
 }
+
+.content{
+    background-color: #555;
+    width: 80%;
+    margin-left: 150px;
+}
+
+.ruangan:first-child{
+    margin-top: 100px;
+}
+
+.ruangan{
+    margin: 20px auto;
+    width: 600px;
+}
+
+.ruangan li{
+    list-style: none;
+    width: 100%;
+    margin: 20px;
+    padding: 10px;
+    border-radius: 8px;
+    background: #d9d9d9;
+    box-shadow: 6px 6px 10px -1px rgba(0, 0, 0, 15)
+                -6px -6px 10px -1px rgba(255, 255, 255, 0.7);
+}
+
+.ruangan li label{
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+label::before{
+    content: '+';
+    margin-right: 10px;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+input[type="checkbox"]{
+    display: none;
+}
+
+.ruangan .content-ruangan{
+    color: #555;
+    padding: 0 10px;
+    line-height: 26px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s, padding 0.5s;
+}
+
+.ruangan input[type="checkbox"]:checked + label + .content-ruangan{
+    max-height: 400px;
+    padding: 10px 10px 20px;
+}
+
+.ruangan input[type="checkbox"]:checked + label::before{
+    content: '-';
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

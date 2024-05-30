@@ -12,7 +12,7 @@ class UbahPasswordController extends Controller
 {
     public function index(){
         $user = User::all();
-        return view('login.lupaPassword', ['user', $user]);
+        return view('login.lupaPassword', ['user' => $user]);
     }
 
     public function ubahPassword(){
@@ -22,12 +22,9 @@ class UbahPasswordController extends Controller
     public function requestUbahPassword(Request $request){
         $validasiUsername = User::where('username', $request->username)->exists();
         $validasiRecoveryCode = User::where('recovery_code', $request->recovery_code)->exists();
-        $user = User::all();
-        // dd($user);
         if($validasiUsername && $validasiRecoveryCode){
-            // if(auth()->user()->username == $request->username && auth()->user()->recovery_code == $request->recovery_code){
-                return redirect(route('ubahPassword'), ['user' => $user]);
-            // }
+            $data = User::where('username', $request->username)->first();
+            return view('login.ubahPassword', ['data' => $data]);
         }
     }
 

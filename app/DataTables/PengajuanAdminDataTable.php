@@ -23,7 +23,14 @@ class PengajuanAdminDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('action', 'pengajuanadmin.action')
+            ->addColumn('action', function ($pinjaman){
+                if($pinjaman->status_admin == 'Menunggu'){
+                    $btn  = '
+                        <a href="'.url('admin/cekPengajuan/' . $pinjaman->user_id. '/konfirmasi').'" class="btn btn-info btn-sm">Konfirmasi</a> 
+                    '; 
+                    return $btn;
+                }
+            })
             ->setRowId('id');
     }
 
@@ -65,11 +72,16 @@ class PengajuanAdminDataTable extends DataTable
         return [
             Column::make('id'),
             Column::make('user_id'),
-            Column::make('tanggal_pinjam'),
+            Column::make('ruangan'),
+            Column::make('tanggal_mulai'),
             Column::make('tanggal_selesai'),
-            Column::make('dokumen'),
+            Column::make('dokumen_pendukung'),
             Column::make('status_admin'),
-            Column::make('aksi'),
+            Column::computed('action')
+                  ->exportable(false)
+                  ->printable(false)
+                  ->width(60)
+                  ->addClass('text-center'),
         ];
     }
 

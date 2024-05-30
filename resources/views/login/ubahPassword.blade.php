@@ -24,7 +24,7 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="main-content">
-                        <form action="{{route('simpanUbahPassword')}}" method="POST">
+                        <form action="{{url('password/'.$data->username)}}" method="POST" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             {!! method_field('PUT') !!}
                             <h1 class="mb-5">Ubah Password</h1>

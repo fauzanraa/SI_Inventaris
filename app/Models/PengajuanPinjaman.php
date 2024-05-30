@@ -13,7 +13,7 @@ class PengajuanPinjaman extends Model
     protected $table = 'pengajuan_pinjamans';
     protected $primaryKey = 'id';
 
-    protected $fillable = ['user_id', 'tanggal_pinjam', 'tanggal_selesai', 'dokumen_pendukung', 'status_admin', 'status_urt'];
+    protected $fillable = ['user_id', 'ruangan', 'tanggal_mulai', 'tanggal_selesai', 'dokumen_pendukung', 'status_admin', 'status_urt'];
 
     public function user(): BelongsTo
     {

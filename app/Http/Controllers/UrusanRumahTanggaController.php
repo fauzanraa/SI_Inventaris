@@ -17,12 +17,12 @@ class UrusanRumahTanggaController extends Controller
         return $datatable->render('urt.konfirmasiPengajuan');
     }
 
-    public function konfirmasiPengajuan(string $id){
+    public function konfirmasi(string $id){
         PengajuanPinjaman::find($id)->update([
-            'status_rumah_tangga' => 'Dikonfirmasi',
+            'status_urt' => 'Dikonfirmasi',
         ]);
 
-        return redirect(route('konfirmasiPengajuanUrt'));
+        return redirect('/urt/cekPengajuan');
     }
 
     public function laporan(LaporanUrtDataTable $datatable){

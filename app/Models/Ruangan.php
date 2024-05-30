@@ -12,5 +12,5 @@ class Ruangan extends Model
     protected $table = 'ruangans';
     protected $primaryKey = 'id';
 
-    protected $fillable = ['kode', 'nama', 'foto', 'lantai'];
+    protected $fillable = ['id', 'kode', 'nama', 'foto', 'lantai'];
 }

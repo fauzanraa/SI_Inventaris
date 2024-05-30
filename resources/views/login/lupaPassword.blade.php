@@ -24,7 +24,7 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="main-content">
-                        <form action="{{route('requestUbahPassword/'.$user->username)}}" method="POST" >
+                        <form action="{{route('requestUbahPassword')}}" method="POST" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             <h1 class="mb-5">Lupa Password</h1>
                             <div class="mb-3">

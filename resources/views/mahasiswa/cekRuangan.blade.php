@@ -31,13 +31,28 @@
         </div>
 
         <div class="content">
-            {{ $dataTable->table()}}        
+            @foreach ($ruangan as $item)
+            <ul class="ruangan">
+                <li >
+                    <input type="checkbox" name="ruangan" id={{$item->id}}>
+                    <label for={{$item->id}}>{{$item->nama}}</label>
+                    <div class="content-ruangan">
+                        <p>{{$item->kode}} | {{'Lantai ' .$item->lantai}}
+                            <br><br>
+                        <img src="{{ asset('ruangan/' .$item->foto) }}" height="15%" width="50%">
+                        </p>
+                    </div>
+                </li>
+            </ul>
+                
+            @endforeach
+            {{-- {{ $dataTable->table()}}         --}}
         </div>
     </section>
 
     <script src="/DataTables/datatables.js"></script>
-    @push('scripts')
+    {{-- @push('scripts')
         {{$dataTable->scripts(attributes: ['type' => 'module'])}}
-    @endpush
+    @endpush --}}
 </body>
 </html>

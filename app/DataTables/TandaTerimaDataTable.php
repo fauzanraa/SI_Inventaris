@@ -23,7 +23,12 @@ class TandaTerimaDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('action', 'tandaterima.action')
+            ->addColumn('action', function($tandaTerima){
+                $btn  = '
+                        <a href="'.url('admin/cekPengajuan/' . $tandaTerima->id. '/konfirmasi').'" class="btn btn-info btn-sm"><i class="fa-solid fa-eye"></i></a>
+                        '; 
+                return $btn;
+            })
             ->setRowId('id');
     }
 
@@ -32,7 +37,9 @@ class TandaTerimaDataTable extends DataTable
      */
     public function query(PinjamanRuangan $model): QueryBuilder
     {
-        return $model->newQuery();
+        return $model->newQuery()
+                        ->join('pengajuan_pinjamans', 'pinjaman_ruangans.pengajuan_pinjaman_id', '=', 'pengajuan_pinjamans.id' )
+                        ->select('pinjaman_ruangans.*', 'pengajuan_pinjamans.tanggal_mulai as tanggal_mulai', 'pengajuan_pinjamans.tanggal_selesai as tanggal_selesai');
     }
 
     /**
@@ -66,8 +73,14 @@ class TandaTerimaDataTable extends DataTable
             Column::make('id'),
             Column::make('pengajuan_pinjaman_id'),
             Column::make('tanggal_approval'),
-            Column::make('created_at'),
-            Column::make('updated_at'),
+            Column::make('tanggal_mulai'),
+            Column::make('tanggal_selesai'),
+            Column::computed('action')
+                  ->exportable(false)
+                  ->printable(false)
+                  ->width(60)
+                  ->height(200)
+                  ->addClass('text-center'),
         ];
     }
 
