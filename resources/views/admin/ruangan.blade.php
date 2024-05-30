@@ -13,45 +13,45 @@
 <body>
     <section class="admin">
         <div class="sidebar">
-            {{-- <nav>
+            <nav>
                 <ul>
-                <li class="nav-item">
-                    <a href="{{ url('/admin')}}" class="nav-link {{ \Route::is('/admin') ? 'active' : ''}}">
-                        <p>
-                            <i class="nav-icon fas fa-solid fa-house"></i>
-                            Dashboard
-                        </p>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ url('/level')}}" class="nav-link ">
-                        <p>
-                            <i class="nav-icon fas fa-solid fa-calendar"></i>
-                            Ruangan
-                        </p>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ url('/level')}}" class="nav-link ">
-                        <p>
-                            <i class="nav-icon fas fa-solid fa-pen-to-square"></i>
-                            Konfirmasi Pengajuan
-                        </p>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ url('/level')}}" class="nav-link ">
-                        <p>
-                            <i class="nav-icon fas fa-reguler fa-file"></i>
-                            Laporan
-                        </p>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ url('/level')}}" class="nav-link ">
-                        <p>
-                            <i class="nav-icon fas fa-solid fa-right-from-bracket"></i>
-                            Logout
-                        </p>
-                </li>
+                    <li class="nav-item">
+                        <a href="{{ route('indexAdmin')}}" class="nav-link {{ \Route::is('/admin') ? 'active' : ''}}">
+                            <p>
+                                <i class="nav-icon fas fa-solid fa-house"></i>
+                                Dashboard
+                            </p>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('listRuanganAdmin')}}" class="nav-link ">
+                            <p>
+                                <i class="nav-icon fas fa-solid fa-calendar"></i>
+                                Ruangan
+                            </p>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('cekPengajuanAdmin')}}" class="nav-link ">
+                            <p>
+                                <i class="nav-icon fas fa-solid fa-pen-to-square"></i>
+                                Konfirmasi Pengajuan
+                            </p>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('laporanAdmin')}}" class="nav-link ">
+                            <p>
+                                <i class="nav-icon fas fa-reguler fa-file"></i>
+                                Laporan
+                            </p>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('logout')}}" class="nav-link ">
+                            <p>
+                                <i class="nav-icon fas fa-solid fa-right-from-bracket"></i>
+                                Logout
+                            </p>
+                    </li>
                 </ul>
-            </nav> --}}
+            </nav>
         </div>
 
         <div class="content">

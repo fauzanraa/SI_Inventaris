@@ -19,10 +19,18 @@
             </div>
             <div class="link">
                 <ul>
-                    <li class="navbar">Beranda</li>
-                    <li class="navbar">Cek Ruangan</li>
-                    <li class="navbar">Pengajuan</li>
-                    <li class="navbar">Tanda Terima</li>
+                    <li class="navbar">
+                        <a href="{{route('indexMahasiswa')}}">Beranda</a>
+                    </li>
+                    <li class="navbar">
+                        <a href="{{route('cekRuanganMhs')}}">Cek Ruangan</a>
+                    </li>
+                    <li class="navbar">
+                        <a href="{{route('pengajuanMhs')}}">Pengajuan</a>
+                    </li>
+                    <li class="navbar">
+                        <a href="{{route('tandaTerimaMhs')}}">Tanda Terima</a>
+                    </li>
                 </ul>
             </div>
             <div class="avatar">
@@ -46,13 +54,9 @@
             </ul>
                 
             @endforeach
-            {{-- {{ $dataTable->table()}}         --}}
         </div>
     </section>
 
     <script src="/DataTables/datatables.js"></script>
-    {{-- @push('scripts')
-        {{$dataTable->scripts(attributes: ['type' => 'module'])}}
-    @endpush --}}
 </body>
 </html>
