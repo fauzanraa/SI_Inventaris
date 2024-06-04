@@ -1,57 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;
-}
-/* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
-footer, header, hgroup, menu, nav, section {
-	display: block;
-}
-body {
-	line-height: 1;
-}
-ol, ul {
-	list-style: none;
-}
-blockquote, q {
-	quotes: none;
-}
-blockquote:before, blockquote:after,
-q:before, q:after {
-	content: '';
-	content: none;
-}
-table {
-	border-collapse: collapse;
-	border-spacing: 0;
-}
-
 body{
     background: url(/assets/bg-user.png);
+    background-size: cover;
     background-repeat: no-repeat;
 }
 
-.tandaTerima{
+.mahasiswa{
     font-family: "Poppins", sans-serif;
-    font-weight: 500;
+    font-weight: 400;
     font-style: normal;
 }
 
@@ -75,8 +32,8 @@ body{
 
 .logo .logo-jti{
     width: 35px;
-    height: 30px;
-    margin-left: 30px;
+    height: 35px;
+    margin-left: 35px;
     margin-top: 2px;
 }
 
@@ -94,9 +51,17 @@ ul li a{
     color: white;
 }
 
-.avatar .avatar-user{
-    height: 40px;
-    margin-left: 350px;
+.navbar a.logout{
+    margin-left: 290px;
+}
+
+.menu-toggle{
+    color: rgb(94, 94, 94);
+    float: right;
+    line-height: 50px;
+    font-size: 24px;
+    cursor: pointer;
+    display: none;
 }
 
 .content{
@@ -105,4 +70,73 @@ ul li a{
     width: 70%;
     margin-left: 200px;
     padding: 20px 20px ;
+}
+
+@media screen and (max-width: 812px) {
+    body{
+        background-size: 1100px;
+    }
+
+    .top-bar{
+        padding: 0 20px;
+    }
+
+    .logo .logo-jti{
+        margin-top: -45px;
+    }
+
+    .link ul{
+        margin-left: 15px;
+    }
+
+    .link li{
+        display: block;
+        font-size: 20px;
+        margin-top: 50px;
+    }
+
+    .navbar a.logout{
+        margin-left: 10px;
+    }
+
+    .menu-toggle{
+        display: block;
+        margin-left: 600px;
+        color: white;
+    }
+
+    .top-bar nav{
+        position: absolute;
+        width: 100%;
+        height: 500px;
+        background: #333;
+        top: 50px;
+        left: -100%;
+        transition: 0.5s all;
+    }
+
+    .top-bar nav.active{
+        left: 0;
+    }
+
+    .top-bar nav ul{
+        display: block;
+        text-align: center;
+    }
+
+    .top-bar nav ul li a{
+        border-bottom: 1 px solid rgba(0, 0, 0, 0.2);
+        color: rgb(255, 255, 255);
+    }
+
+    .content{
+        width: 70%;
+        margin-left: 130px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .menu-toggle{
+        margin-left: 410px;
+    }
 }

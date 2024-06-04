@@ -33,8 +33,10 @@ class LaporanAdminDataTable extends DataTable
     public function query(PinjamanRuangan $model): QueryBuilder
     {
         return $model->newQuery()
-                        ->join('pengajuan_pinjamans', 'pinjaman_ruangans.pengajuan_pinjaman_id', '=', 'pengajuan_pinjamans.id' )
-                        ->select('pinjaman_ruangans.*', 'pengajuan_pinjamans.tanggal_mulai as tanggal_mulai', 'pengajuan_pinjamans.tanggal_selesai as tanggal_selesai');
+                        ->join('pengajuan_pinjamans', 'pinjaman_ruangans.pengajuan_pinjaman_id', '=', 'pengajuan_pinjamans.id')
+                        ->join('ruangans', 'pengajuan_pinjamans.ruangan_id', '=', 'ruangans.id' )
+                        ->join('users', 'pengajuan_pinjamans.user_id', '=', 'users.id')
+                        ->select('pinjaman_ruangans.*', 'pengajuan_pinjamans.tanggal_mulai as tanggal_mulai', 'pengajuan_pinjamans.tanggal_selesai as tanggal_selesai', 'users.nama as nama', 'ruangans.nama as nama_ruangan');
     }
 
     /**
@@ -50,8 +52,6 @@ class LaporanAdminDataTable extends DataTable
                     ->orderBy(1)
                     ->selectStyleSingle()
                     ->buttons([
-                        Button::make('excel'),
-                        Button::make('csv'),
                         Button::make('pdf'),
                         Button::make('print'),
                         Button::make('reset'),
@@ -65,7 +65,8 @@ class LaporanAdminDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::make('id'),
+            Column::make('nama'),
+            Column::make('nama_ruangan'),
             Column::make('tanggal_approval'),
             Column::make('tanggal_mulai'),
             Column::make('tanggal_selesai'),

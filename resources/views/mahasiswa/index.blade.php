@@ -1,3 +1,5 @@
+@include('sweetalert::alert')
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,6 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/mahasiswa/styleIndexMhs.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="/fontawesome/css/all.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>SI Inventaris</title>
 </head>
 <body>
@@ -28,11 +33,14 @@
                         <li class="navbar">
                             <a href="{{route('tandaTerimaMhs')}}">Tanda Terima</a>
                         </li>
+                        <li class="navbar">
+                            <a href="{{route('logout')}}" class="logout">LogOut</a>
+                        </li>
                     </ul>
                 </nav>
-            </div>
-            <div class="avatar">
-                <img src="/assets/avatar-user.png" alt="avatar" class="avatar-user">
+                <div class="menu-toggle">
+                    <i class="fa fa-bars"></i>
+                </div>
             </div>
         </div>
         
@@ -42,10 +50,10 @@
                     <h1>Butuh Ruangan Siap Pakai <br> Di Kampus ?</h1>
                     <p>
                     Pinjam ruang fasilitas kampus untuk kegiatan kemahasiswaan dengan mudah. Kamu juga bisa cari dan 
-                    <br>cek ketersediaan ruangan di kolom search dibawah ini.</p>
+                    <br class="responsive">cek ketersediaan ruangan di kolom search dibawah ini.</p>
                 </div>
                 <div class="search-hero">
-                    <form action="{{route('cariRuangan')}}" method="GET" enctype="multipart/form-data">
+                    <form action="{{route('cekRuanganMhs')}}" method="GET" id="filter_nama" enctype="multipart/form-data">
                         {{ csrf_field() }}
                         <div class="mb-3">
                             <input type="text" class="form-control" id="search" name="nama_ruangan" placeholder="Cari Ruangan">
@@ -115,13 +123,13 @@
                 </div>
             </div>
             <div class="watch-more mt-4" >
-                <a href="">Lihat lebih banyak</a>
+                <a href="{{route('cekRuanganMhs')}}">Lihat lebih banyak</a>
             </div>
             <div class="check-class mt-5">
                 <h1>Apa Ruangan Ini Tersedia ?</h1>
                 <div class="input-check">
                     <div class="row">
-                        <form action="{{route('cariRuangan')}}" method="GET" enctype="multipart/form-data">
+                        <form action="{{route('cekRuanganMhs')}}" method="GET" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             {{-- <div class="ruangan">
                                 <div class="mb-3">
@@ -160,17 +168,17 @@
                             <p>
                                 1. Pastikan anda sudah mengecek ketersedian ruangan <br>
                                 2. Jika sudah menemukan ruangan yang ingin dipinjam, silahkan 
-                                <br> akses link berikut  <br>
+                                <br class="responsive"> akses link berikut  <br>
                                 3. Isikan dokumen yang terdapat pada link tersebut <br>
                                 4. Lalu pergi ke halaman pengajuan <br>
                                 5. Nanti akan muncul form pengajuan, isi semua form sesuai 
-                                <br> pengajuan yang dilakukan. Pilih ajukan jika pengisian 
-                                <br> form sudah selesai <br>
+                                <br class="responsive"> pengajuan yang dilakukan. <br class="normal">Pilih ajukan jika pengisian 
+                                <br class="responsive"> form sudah selesai <br>
                                 6. Tunggu hingga pengajuan dikonfirmasi oleh pihak Admin 
-                                <br> dan Urusan Rumah Tangga <br>
+                                <br class="responsive"> dan Urusan Rumah Tangga <br>
                                 7. Cek pengajuan ke halaman tanda terima, jika pengajuan 
-                                <br> dikonfirmasi cetak tanda terima lalu berikan kepada pihak OB 
-                                <br> untuk menggunakan kelas
+                                <br class="responsive"> dikonfirmasi <br class="normal"> cetak tanda terima lalu berikan kepada pihak OB 
+                                <br class="responsive"> untuk menggunakan kelas
                             </p>
                         </div>
                     </div>
@@ -181,5 +189,13 @@
             </div>
         </div>
     </section>
+
+    <script>
+        $(document).ready(function () {
+            $(".menu-toggle").click(function () {
+                $('nav').toggleClass('active');
+            })
+        })
+    </script>
 </body>
 </html>

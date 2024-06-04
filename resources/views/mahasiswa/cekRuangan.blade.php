@@ -6,57 +6,116 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/mahasiswa/styleCekRuangan.css">
-    <!-- Data Tables -->
-    <link rel="stylesheet" href="/DataTables/datatables.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="/fontawesome/css/all.css">
     <title>SI Inventaris</title>
 </head>
 <body>
-    <section class="cekRuangan">
+    <section class="mahasiswa">
         <div class="top-bar">
             <div class="logo">
                 <img src="/assets/logo-jti.png" alt="logo-jti" class="logo-jti">
             </div>
             <div class="link">
-                <ul>
-                    <li class="navbar">
+                <nav>
+                    <ul>
+                        <li class="navbar">
                         <a href="{{route('indexMahasiswa')}}">Beranda</a>
-                    </li>
-                    <li class="navbar">
-                        <a href="{{route('cekRuanganMhs')}}">Cek Ruangan</a>
-                    </li>
-                    <li class="navbar">
-                        <a href="{{route('pengajuanMhs')}}">Pengajuan</a>
-                    </li>
-                    <li class="navbar">
-                        <a href="{{route('tandaTerimaMhs')}}">Tanda Terima</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="avatar">
-                <img src="/assets/avatar-user.png" alt="avatar" class="avatar-user">
+                        </li>
+                        <li class="navbar">
+                            <a href="{{route('cekRuanganMhs')}}">Cek Ruangan</a>
+                        </li>
+                        <li class="navbar">
+                            <a href="{{route('pengajuanMhs')}}">Pengajuan</a>
+                        </li>
+                        <li class="navbar">
+                            <a href="{{route('tandaTerimaMhs')}}">Tanda Terima</a>
+                        </li>
+                        <li class="navbar">
+                            <a href="{{route('logout')}}" class="logout">LogOut</a>
+                        </li>
+                    </ul>
+                </nav>
+                <div class="menu-toggle">
+                    <i class="fa fa-bars"></i>
+                </div>
             </div>
         </div>
 
         <div class="content">
-            @foreach ($ruangan as $item)
-            <ul class="ruangan">
-                <li >
-                    <input type="checkbox" name="ruangan" id={{$item->id}}>
-                    <label for={{$item->id}}>{{$item->nama}}</label>
-                    <div class="content-ruangan">
-                        <p>{{$item->kode}} | {{'Lantai ' .$item->lantai}}
-                            <br><br>
-                        <img src="{{ asset('ruangan/' .$item->foto) }}" height="15%" width="50%">
-                        </p>
+            <div class="filter">
+                <form action="{{route('cekRuanganMhs')}}" method="GET" enctype="multipart/form-data">
+                    {{ csrf_field() }}
+                    <div class="form-nama mb-3">
+                        <input type="text" class="form-control" id="filter_nama" name="filter_nama" placeholder="Cari Ruangan">
                     </div>
-                </li>
-            </ul>
-                
-            @endforeach
+                    <div class="form-tanggal-mulai mb-3">
+                        <input type="tezt" class="form-mulai form-control" id="filter_tanggal_mulai" name="filter_tanggal_mulai" placeholder="Tanggal Mulai" onfocus="this.type='date'">
+                    </div>
+                    <div class="form-tanggal-selesai mb-3">
+                        <input type="text" class="form-control" id="filter_tanggal_selesai" name="filter_tanggal_selesai" placeholder="Tanggal Selesai" onfocus="this.type='date'">
+                    </div>
+                    <button type="submit" class="btn btn-primary" hidden>Submit</button>
+                </form>
+            </div>
+            
+            <div id="list_ruangan" class="list_ruangan">
+                @foreach ($ruangan as $item)
+                <ul class="ruangan" id="ruangan">
+                    <li>
+                        <input type="checkbox" name="ruangan" id={{$item->id}}>
+                        <label for={{$item->id}}>{{$item->nama}}</label>
+                        <div class="content-ruangan">
+                            <p>{{$item->kode}} | {{'Lantai ' .$item->lantai}}
+                                <br><br>
+                                <img src="{{ asset('ruangan/' .$item->foto) }}" height="15%" width="50%">
+                            </p>
+                        </div>
+                    </li>
+                </ul>
+                @endforeach
+            </div>
         </div>
     </section>
 
-    <script src="/DataTables/datatables.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(".menu-toggle").click(function () {
+                $('nav').toggleClass('active');
+            })
+        });
+
+        $(document).ready(function(){
+            $('#filter_nama').on('keyup',function(){
+                var queryNama= $(this).val();
+                $.ajax({
+                    url:"{{ route('cariRuanganByNamaMhs') }}",
+                    type:"GET",
+                    data:{'filter_nama':queryNama},
+                    success:function(data){
+                        $('#list_ruangan').html(data);
+                    }
+                });
+            });
+
+            $('#filter_tanggal_mulai, #filter_tanggal_selesai').on('input',function(){
+                var queryTanggalMulai= $('#filter_tanggal_mulai').val();
+                var queryTanggalSelesai= $('#filter_tanggal_selesai').val();
+                console.log(queryTanggalMulai);
+                $.ajax({
+                    url:"{{ route('cariRuanganByTglMhs') }}",
+                    type:"GET",
+                    data:{
+                        'filter_tanggal_mulai':queryTanggalMulai,
+                        'filter_tanggal_selesai':queryTanggalSelesai
+                    },
+                    success:function(data){
+                        $('#list_ruangan').html(data);
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>

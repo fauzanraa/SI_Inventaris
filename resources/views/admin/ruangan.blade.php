@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@include('sweetalert::alert')
 
 <!DOCTYPE html>
 <html lang="en">
@@ -6,52 +7,63 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="/css/admin/styleAdmin.css">
+    <link rel="stylesheet" href="/css/admin/styleRuangAdm.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="/fontawesome/css/all.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <title>SI Inventaris</title>
 </head>
-<body>
+<body class="bg-body-tertiary">
     <section class="admin">
         <div class="sidebar">
             <nav>
                 <ul>
                     <li class="nav-item">
-                        <a href="{{ route('indexAdmin')}}" class="nav-link {{ \Route::is('/admin') ? 'active' : ''}}">
-                            <p>
-                                <i class="nav-icon fas fa-solid fa-house"></i>
-                                Dashboard
-                            </p>
+                            <a href="{{ route('indexAdmin')}}" class="nav-link {{ \Route::is('/admin') ? 'active' : ''}}">
+                                <p>
+                                    <i class="nav-icon fas fa-solid fa-house"></i>
+                                    <span>Dashboard</span>
+                                </p>
+                            </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('listRuanganAdmin')}}" class="nav-link ">
-                            <p>
-                                <i class="nav-icon fas fa-solid fa-calendar"></i>
-                                Ruangan
-                            </p>
+                            <a href="{{ route('listRuanganAdmin')}}" class="nav-link ">
+                                <p>
+                                    <i class="nav-icon fas fa-solid fa-calendar"></i>
+                                    <span>Ruangan</span>
+                                </p>
+                            </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('cekPengajuanAdmin')}}" class="nav-link ">
-                            <p>
-                                <i class="nav-icon fas fa-solid fa-pen-to-square"></i>
-                                Konfirmasi Pengajuan
-                            </p>
+                            <a href="{{ route('cekPengajuanAdmin')}}" class="nav-link ">
+                                <p>
+                                    <i class="nav-icon fas fa-solid fa-pen-to-square"></i>
+                                    <span>Konfirmasi Pengajuan</span>
+                                </p>
+                            </a>    
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('laporanAdmin')}}" class="nav-link ">
-                            <p>
-                                <i class="nav-icon fas fa-reguler fa-file"></i>
-                                Laporan
-                            </p>
+                            <a href="{{ route('laporanAdmin')}}" class="nav-link ">
+                                <p>
+                                    <i class="nav-icon fas fa-reguler fa-file"></i>
+                                    <span>Laporan</span>
+                                </p>
+                            </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('logout')}}" class="nav-link ">
-                            <p>
-                                <i class="nav-icon fas fa-solid fa-right-from-bracket"></i>
-                                Logout
-                            </p>
+                            <a href="{{ route('logout')}}" class="nav-link ">
+                                <p>
+                                    <i class="nav-icon fas fa-solid fa-right-from-bracket"></i>
+                                    <span>Logout</span>
+                                </p>
+                            </a>
                     </li>
                 </ul>
             </nav>
+            <div class="menu-toggle">
+                <i class="fa fa-bars"></i>
+            </div>
         </div>
 
         <div class="content">
@@ -68,13 +80,27 @@
 
             <div class="card-container">
                 <div class="card-tools"> 
-                    <a class="btn btn-sm btn-primary mt-1" href="{{ route('tambahRuanganAdmin') }}">Tambah</a> 
+                    <a class="btn  mt-1" href="{{ route('tambahRuanganAdmin') }}">Tambah</a> 
                     <br><br>
                 </div>
-                {{ $dataTable->table()}} 
+                <div class="table-content">
+                    {{ $dataTable->table()}} 
+                </div>
             </div>
         </div>
     </section>
+
+    @if (Session::has('message'))
+        <script>
+            swal("Message","{{Session::get('message')}}","success",{
+                position: "top-end",
+                icon: "success",
+                title: "Room has been saved",
+                button: false,
+                timer: 2000
+            })
+        </script>
+    @endif
 
     @push('scripts')
         {{$dataTable->scripts(attributes: ['type' => 'module'])}}

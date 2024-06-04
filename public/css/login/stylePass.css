@@ -9,57 +9,146 @@ body{
 
 .lupa-pass, .ubah-pass{
     font-family: "Poppins", sans-serif;
-    font-weight: 500;
+    font-weight: 400;
     font-style: normal;
 }
 
-.gradient-login .bg-login{
-    width: 610px;
-    height: 664px;
-    position: absolute;
-    top: 0;
-    left: 0;
+.main-content{
+    background-color: #ffffff;
+    width: 50%;
+    height: 450px;
+    margin-top: 110px;
+    margin-left: 290px;
+    border-radius: 20px;
 }
 
 .logo .logo-jti{
-    position: absolute;
-    z-index: 1;
-    top: 10px;;
-    left: 30px;
-    width: 55px;
-    height: 50px;
+    margin-left: 30px;
+    margin-top: 30px;
+    width: 35px;
+    height: 35px;
 }
 
-.vector .vector-login{
-    position: absolute;
-    z-index: 2;
-    box-sizing: border-box;
-    padding-top: 175px;
-    margin-left: 100px;
-    width: 350px;
-}
-
-.main-content{
-    margin-top: 30%;
-}
-
-.main-content h1{
+.title {
+    font-weight: 800;
     text-align: center;
-    font-size: 60px;
-    letter-spacing: 3px;
 }
 
-.main-content input{
-    width: 65%;
-    height: 45px;
-    margin: auto;
+.sub-title{
+    text-align: center;
+}
+
+.form input{
+    background-color: #e4e4e4;
+    height: 60px;
+    width: 81%;
+    margin-left: 50px;
+}
+
+.form input:focus{
+    background: #e4e4e4;
+}
+
+.main-content:has(.invalid-feedback){
+    height: 110vh;
+    margin-bottom: 45px;
+}
+
+.invalid-feedback{
+    margin-left: 50px;
+}
+
+.button-next, .button-save{
     border: 1px solid black;
-    opacity: 0.6;
+    border-radius: 10px;
+    margin-left: 50px;
+    width: 81%;
+    text-align: center;
 }
 
-.main-content .btn{
-    margin-left: 120px;
-    background-color: #3F47F1;
-    width: 300px;
-    color: white;
+.button-next:hover, .button-save:hover{
+    background-color: #FBC93D;
+}
+
+.btn{
+    width: 100%;
+    height: 100%;
+}
+
+.cancel a, .back a{ 
+    text-decoration: none;
+}
+
+.back{
+    margin-left: 548px;
+    margin-top: -65px;
+}
+
+.cancel{
+    margin-left: 248px;
+}
+
+@media only screen and (max-width: 812px) {
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+    
+    body{
+        background-size: 900px;
+    }
+    
+    .main-content{
+        width: 90%;
+        height: 450px;
+        margin-left: 30px;
+        margin-top: 70px;
+    }
+
+    .main-content:has(.invalid-feedback){
+        height: 81vh;
+        
+        .back a{
+            margin-top: -10px;
+        }
+    }
+    
+    .title {
+        font-weight: 800;
+    }
+
+    .form input{
+        margin-left: 55px;
+    }
+
+    .button-next{
+        margin-left: 55px;
+    }
+
+    .button-save{
+        margin-left: 55px;
+    }
+
+    .back{
+        margin-left: 550px;
+    }
+
+    .cancel{
+        margin-left: 205px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .form input{
+        margin-left: 40px;
+    }
+
+    .button-next{
+        margin-left: 40px;
+    }
+
+    .button-save{
+        margin-left: 40px;
+    }
+
+    .back{
+        margin-left: 410px;
+    }
 }

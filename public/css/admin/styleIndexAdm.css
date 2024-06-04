@@ -1,0 +1,179 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+body{
+    margin: 0;
+}
+
+.admin{
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+}
+
+.sidebar{
+    background-color: #fff;
+    float: left;
+    width: 23%;
+    height: 660px;
+    position: fixed;
+    z-index: 2;
+}
+
+.sidebar ul li{
+    background-color: #d9d9d9;
+    height: 50px;
+    width: 250px;
+    border-radius: 10px;
+    list-style: none;
+    margin: 30px 10px 0 0;
+}
+
+.sidebar li:nth-child(5){
+    margin-top: 260px;
+}
+
+.sidebar a{
+    text-decoration: none;
+    color: black;
+}
+
+.sidebar p{
+    text-align: center;
+    padding-top: 11px;
+}
+
+.menu-toggle{
+    color: rgb(94, 94, 94);
+    position: absolute;
+    line-height: 50px;
+    font-size: 24px;
+    cursor: pointer;
+    top: 0;
+    margin-left: 365px;
+    margin-top: 8px;
+    display: none;
+}
+
+.content{
+    background-color: white;
+    float: right;
+    width: 75%;
+    height: 100vh;
+    padding: 0px 5px;
+}
+
+.topbar .title-content, .logo-jti{
+    display: inline-block;
+    margin-top: 15px;
+}
+
+.topbar .title-content{
+    margin-left: 20px;
+    font-weight: 800;
+}
+
+.topbar .logo-jti img{
+    width: 35px;
+    height: 35px;
+    margin-left: 740px;
+}
+
+.topbar .vertical_line{
+    height: 10px;
+    width: 99%;
+    background-color: #d9d9d9;
+    border-radius: 10px;
+}
+
+.card-container{
+    background-color: #d9d9d9;
+    padding: 30px 0 20px 30px;
+    margin-top: 50px;
+    margin-left: 30px;
+    border-radius: 20px;
+    width: 90%;
+}
+
+.notif-pengajuan p{
+    display: inline-block;
+    margin-left: 20px;
+}
+
+.notif-pengajuan p.count-notif{
+    width: 30px;
+    height: 30px;
+    padding-left: 13px;
+    padding-top: 4px;
+    background-color: white;
+}
+
+.notif-pengajuan p.notif-detail{
+    margin-left: 30px;
+}
+
+.link-content{
+    margin-left: 690px;
+    margin-top: 160px;
+    border: 1px solid black;
+    border-radius: 10px;
+    text-align: center;
+    padding-top: 3px;
+    text-decoration: none;
+    width: 15%;
+    height: 30px;
+    background-color: #41439A;
+}
+
+.link-content a{
+    text-decoration: none;
+    color: white;
+}
+
+.link-content:hover{
+    background-color: #41439A;
+}
+
+
+@media screen and (max-width: 812px) {
+    .sidebar{
+        height: 570px;
+    }
+
+    .sidebar span{
+        display: none;
+    }
+
+    .sidebar ul li{
+        width: 80px;
+        margin-left: 20px;
+    }
+
+    .sidebar li:nth-child(5){
+        margin-top: 150px;
+    }
+
+    .topbar .logo-jti img{
+        margin-left: 330px;
+    }
+
+    .link-content{
+        margin-left: 335px;
+        margin-top: 100px;
+        width: 25%;
+    }
+}
+
+.cf:before,
+.cf:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+
+.cf:after {
+    clear: both;
+}
+
+.cf {
+    zoom: 1;
+}
+

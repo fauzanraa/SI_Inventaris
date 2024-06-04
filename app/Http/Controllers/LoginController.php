@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert as Alert;
 
 class LoginController extends Controller
 {
@@ -12,12 +13,22 @@ class LoginController extends Controller
     }
 
     public function postLogin(Request $request){
+        $request->validate([
+            'username' => 'required|min:3',
+            'password' => 'required|min:3|max:12',
+        ]);
+
         if(Auth::attempt($request->only('username','password'))){
-            if(auth()->user()->posisi_id == 1 && 2){
-                return redirect(route('indexMahasiswa'));
+            if(auth()->user()->posisi_id == 1){
+                Alert::success('Success Title', 'Success Message');
+                return redirect(route('indexAdmin'))->with('message', 'Login Succesfully');
+            }
+            if(auth()->user()->posisi_id == 2){
+                return redirect(route('indexUrt'))->with('message', 'Login Succesfully');
             }
             if(auth()->user()->posisi_id == 3){
-                return redirect(route('homeStaff'));
+                Alert::success('Success Title', 'Success Message');
+                return redirect(route('indexMahasiswa'));
             }
             // dd(auth()->user()->level_user);
         }

@@ -25,7 +25,7 @@ class TandaTerimaDataTable extends DataTable
         return (new EloquentDataTable($query))
             ->addColumn('action', function($tandaTerima){
                 $btn  = '
-                        <a href="'.url('admin/cekPengajuan/' . $tandaTerima->id. '/konfirmasi').'" class="btn btn-info btn-sm"><i class="fa-solid fa-eye"></i></a>
+                        <a href="'.url('/mahasiswa/'.$tandaTerima->id. '/buktiPeminjaman').'" class="btn btn-primary btn-sm"><i class="fa-regular fa-clipboard"></i></a>
                         '; 
                 return $btn;
             })
@@ -39,7 +39,8 @@ class TandaTerimaDataTable extends DataTable
     {
         return $model->newQuery()
                         ->join('pengajuan_pinjamans', 'pinjaman_ruangans.pengajuan_pinjaman_id', '=', 'pengajuan_pinjamans.id' )
-                        ->select('pinjaman_ruangans.*', 'pengajuan_pinjamans.tanggal_mulai as tanggal_mulai', 'pengajuan_pinjamans.tanggal_selesai as tanggal_selesai');
+                        ->join('ruangans', 'pengajuan_pinjamans.ruangan_id', '=', 'ruangans.id' )
+                        ->select('pinjaman_ruangans.*', 'pengajuan_pinjamans.tanggal_mulai as tanggal_mulai', 'pengajuan_pinjamans.tanggal_selesai as tanggal_selesai', 'ruangans.nama as nama_ruangan');
     }
 
     /**
@@ -70,16 +71,14 @@ class TandaTerimaDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::make('id'),
-            Column::make('pengajuan_pinjaman_id'),
+            Column::make('nama_ruangan'),
             Column::make('tanggal_approval'),
             Column::make('tanggal_mulai'),
             Column::make('tanggal_selesai'),
             Column::computed('action')
                   ->exportable(false)
                   ->printable(false)
-                  ->width(60)
-                  ->height(200)
+                  ->width(100)
                   ->addClass('text-center'),
         ];
     }

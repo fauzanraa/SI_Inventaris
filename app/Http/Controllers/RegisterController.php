@@ -20,8 +20,8 @@ class RegisterController extends Controller
             'nim' => 'required|max:10',
             'username' => 'required|min:3|unique:users,username',
             'password' => 'required|min:3|max:12',
-            'confirm_password' => 'required|same:password|min:3|max:12',
-            'recovery_code' => 'required|min:3',
+            'confirm_password' => 'required|same:password',
+            'recovery_code' => 'required|min:3|max:8',
         ]);
 
         $data = [

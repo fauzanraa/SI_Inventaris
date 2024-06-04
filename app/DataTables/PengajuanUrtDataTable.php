@@ -24,12 +24,19 @@ class PengajuanUrtDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addColumn('action', function ($pinjaman){
-                    if($pinjaman->status_urt == 'Menunggu'){
-                    $btn  = '
-                        <a href="'.url('urt/cekPengajuan/' . $pinjaman->user_id. '/konfirmasi').'" class="btn btn-info btn-sm">Konfirmasi</a> 
-                    '; 
-                    return $btn;
-                }
+                    if($pinjaman->status_admin === 'Diterima' && $pinjaman->status_urt === 'Menunggu'){
+                        $btn1 = '<a href="'.url('urt/cekPengajuan/' . $pinjaman->id. '/detail').'" class="btn btn-primary"><i class="fa-solid fa-eye"></i></a> ';
+                        $btn2  = '
+                            <a href="'.url('urt/cekPengajuan/' . $pinjaman->id. '/konfirmasi').'" class="btn btn-success"><i class="fa-solid fa-check"></i></a> 
+                        '; 
+                        return $btn1 . $btn2;
+                    }  if ($pinjaman->status_admin != 'Menunggu') {
+                        $btn1 = '<a href="'.url('urt/cekPengajuan/' . $pinjaman->id. '/detail').'" class="btn btn-primary"><i class="fa-solid fa-eye"></i></a> ';
+                        $btn2  = '
+                            <a href="'.url('urt/cekPengajuan/' . $pinjaman->id. '/konfirmasi').'" class="btn btn-success disabled"><i class="fa-solid fa-check"></i></a> 
+                        '; 
+                        return $btn1 . $btn2;
+                    }
             })
             ->setRowId('id');
     }
@@ -39,7 +46,10 @@ class PengajuanUrtDataTable extends DataTable
      */
     public function query(PengajuanPinjaman $model): QueryBuilder
     {
-        return $model->newQuery();
+        return $model->newQuery()
+                        ->join('ruangans', 'pengajuan_pinjamans.ruangan_id', '=', 'ruangans.id')
+                        ->join('users', 'pengajuan_pinjamans.user_id', '=', 'users.id')
+                        ->select('pengajuan_pinjamans.*', 'ruangans.nama as nama_ruangan', 'users.nama as nama_user');
     }
 
     /**
@@ -55,10 +65,6 @@ class PengajuanUrtDataTable extends DataTable
                     ->orderBy(1)
                     ->selectStyleSingle()
                     ->buttons([
-                        Button::make('excel'),
-                        Button::make('csv'),
-                        Button::make('pdf'),
-                        Button::make('print'),
                         Button::make('reset'),
                         Button::make('reload')
                     ]);
@@ -70,16 +76,15 @@ class PengajuanUrtDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::make('id'),
-            Column::make('user_id'),
+            Column::make('nama_user'),
+            Column::make('nama_ruangan'),
             Column::make('tanggal_mulai'),
             Column::make('tanggal_selesai'),
-            Column::make('dokumen_pendukung'),
             Column::make('status_urt'),
             Column::computed('action')
                   ->exportable(false)
                   ->printable(false)
-                  ->width(60)
+                  ->width(100)
                   ->addClass('text-center'),
         ];
     }

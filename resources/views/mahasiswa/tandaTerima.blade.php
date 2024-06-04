@@ -9,32 +9,39 @@
     <!-- Data Tables -->
     <link rel="stylesheet" href="/DataTables/datatables.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="/fontawesome/css/all.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>SI Inventaris</title>
 </head>
 <body>
-    <section class="tandaTerima">
+    <section class="mahasiswa">
         <div class="top-bar">
             <div class="logo">
                 <img src="/assets/logo-jti.png" alt="logo-jti" class="logo-jti">
             </div>
             <div class="link">
-                <ul>
-                    <li class="navbar">
+                <nav>
+                    <ul>
+                        <li class="navbar">
                         <a href="{{route('indexMahasiswa')}}">Beranda</a>
-                    </li>
-                    <li class="navbar">
-                        <a href="{{route('cekRuanganMhs')}}">Cek Ruangan</a>
-                    </li>
-                    <li class="navbar">
-                        <a href="{{route('pengajuanMhs')}}">Pengajuan</a>
-                    </li>
-                    <li class="navbar">
-                        <a href="{{route('tandaTerimaMhs')}}">Tanda Terima</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="avatar">
-                <img src="/assets/avatar-user.png" alt="avatar" class="avatar-user">
+                        </li>
+                        <li class="navbar">
+                            <a href="{{route('cekRuanganMhs')}}">Cek Ruangan</a>
+                        </li>
+                        <li class="navbar">
+                            <a href="{{route('pengajuanMhs')}}">Pengajuan</a>
+                        </li>
+                        <li class="navbar">
+                            <a href="{{route('tandaTerimaMhs')}}">Tanda Terima</a>
+                        </li>
+                        <li class="navbar">
+                            <a href="{{route('logout')}}" class="logout">LogOut</a>
+                        </li>
+                    </ul>
+                </nav>
+                <div class="menu-toggle">
+                    <i class="fa fa-bars"></i>
+                </div>
             </div>
         </div>
 
@@ -43,7 +50,14 @@
         </div>
     </section>
 
-    <script src="/DataTables/datatables.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(".menu-toggle").click(function () {
+                $('nav').toggleClass('active');
+            })
+        })
+    </script>
+    
     @push('scripts')
         {{$dataTable->scripts(attributes: ['type' => 'module'])}}
     @endpush

@@ -10,36 +10,40 @@
 <body>
     <section class="ubah-pass">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="gradient-login">
-                        <img src="/assets/bg-login.png" alt="bg-login" class="bg-login">
-                    </div>
+                <div class="main-content">
                     <div class="logo">
                         <img src="/assets/logo-jti.png" alt="logo-jti" class="logo-jti">
                     </div>
-                    <div class="vector">
-                        <img src="/assets/vector-login.png" alt="vector" class="vector-login">
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="main-content">
-                        <form action="{{url('password/'.$data->username)}}" method="POST" enctype="multipart/form-data">
+                    <div class="title">
+                        <h1 class="mt-5 mb-4">Forgot Password</h1>
+                    </div>               
+                    <form action="{{url('password/'.$data->id)}}" method="POST" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             {!! method_field('PUT') !!}
-                            <h1 class="mb-5">Ubah Password</h1>
-                            <div class="mb-3">
-                                <input type="password" class="form-control" name="password" placeholder="Password Baru">
+                            <div class="form mb-3">
+                                <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" placeholder="New Password">
+                                @error('password')
+                                <div class="invalid-feedback">
+                                    {{$message}}
+                                </div>
+                            @enderror
                             </div>
-                            <div class="mb-3">
-                                <input type="password" class="form-control" name="confirm_password" placeholder="Konfirmasi Password">
+                            <div class="form mb-3">
+                                <input type="password" class="form-control @error('confirm_password') is-invalid @enderror" name="confirm_password" placeholder="Confirm Password">
+                                @error('confirm_password')
+                                <div class="invalid-feedback">
+                                    {{$message}}
+                                </div>
+                            @enderror
                             </div>
-                            <button type="submit" class="btn mt-3">Simpan</button>
+                            <div class="button-save">
+                                <button type="submit" class="btn">Save</button>
                             </div>
-                        </form>
-                    </div>
+                        </form>   
+                        <div class="cancel mt-2">
+                            <a href="{{route('lupaPassword')}}">Cancel</a>
+                        </div>
                 </div>
-            </div>
         </div>
     </section>   
 </body>

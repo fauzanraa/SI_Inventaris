@@ -15,7 +15,7 @@ class PinjamanRuangan extends Model
     protected $table = 'pinjaman_ruangans';
     protected $primaryKey = 'id';
 
-    protected $fillable = ['pengajuan_id', 'username', 'nama', 'password', 'nim', 'recovery_code'];
+    protected $fillable = ['pengajuan_pinjaman_id', 'tanggal_approval', 'catatan'];
 
     public function pengajuan(): HasOne
     {

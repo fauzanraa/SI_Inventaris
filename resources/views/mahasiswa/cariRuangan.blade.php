@@ -12,7 +12,7 @@
     <title>SI Inventaris</title>
 </head>
 <body>
-    <section class="cariRuangan">
+    <section class="mahasiswa">
         <div class="top-bar">
             <div class="logo">
                 <img src="/assets/logo-jti.png" alt="logo-jti" class="logo-jti">

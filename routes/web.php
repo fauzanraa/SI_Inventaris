@@ -33,25 +33,29 @@ Route::post('/simpanRegistrasi', [RegisterController::class, 'simpanRegistrasi']
 
 Route::group(['prefix' => 'password'], function () {
 Route::get('/lupa', [UbahPasswordController::class, 'index'])->name('lupaPassword');
-Route::post('/requestUbahPass', [UbahPasswordController::class, 'requestUbahPassword'])->name('requestUbahPassword');
-Route::get('/ubah', [UbahPasswordController::class, 'ubahPassword'])->name('ubahPassword');
+Route::post('/{id}/requestUbahPass', [UbahPasswordController::class, 'requestUbahPassword'])->name('requestUbahPassword');
 Route::put('/{id}', [UbahPasswordController::class, 'simpanPassword'])->name('simpanUbahPassword');
 });
 
 Route::group(['prefix' => 'mahasiswa'], function () {
     Route::get('/', [MahasiswaController::class, 'index'])->name('indexMahasiswa');
     Route::get('/cekRuangan', [MahasiswaController::class, 'cekRuangan'])->name('cekRuanganMhs');
-    Route::get('/cariRuangan', [MahasiswaController::class, 'cariRuangan'])->name('cariRuangan');
+    Route::get('/pencarianNama', [MahasiswaController::class, 'pencarianNama'])->name('cariRuanganByNamaMhs');
+    Route::get('/pencarianTanggal', [MahasiswaController::class, 'pencarianTanggal'])->name('cariRuanganByTglMhs');
     Route::get('/pengajuan', [MahasiswaController::class, 'pengajuan'])->name('pengajuanMhs');
     Route::post('/pengajuan', [MahasiswaController::class, 'filterRuangan'])->name('filterTanggal');
     Route::post('/simpanPengajuan', [MahasiswaController::class, 'simpanPengajuan'])->name('simpanPengajuanMhs');
     Route::get('/tandaTerima', [MahasiswaController::class, 'tandaTerima'])->name('tandaTerimaMhs');
+    Route::get('/{id}/buktiPeminjaman', [MahasiswaController::class, 'bukti']);
 });
 
 Route::group(['prefix' => 'admin'], function () {
     Route::get('/', [AdminController::class, 'index'])->name('indexAdmin');
     Route::get('/cekPengajuan', [AdminController::class, 'cekPengajuan'])->name('cekPengajuanAdmin');
-    Route::get('/cekPengajuan/{id}/konfirmasi', [AdminController::class, 'konfirmasi'])->name('konfirmasiAdmin');    
+    Route::get('/cekPengajuan/{id}/detail', [AdminController::class, 'detailPengajuan'])->name('detailPengajuanAdmin');    
+    Route::get('/dokumen/{filename}', [AdminController::class, 'cekDokumen'])->name('cekDokumenAdmin');    
+    Route::get('/cekPengajuan/{id}/konfirmasi', [AdminController::class, 'konfirmasiPengajuan'])->name('konfirmasiAdmin');    
+    Route::put('/cekPengajuan/{id}', [AdminController::class, 'simpanKonfirmasi'])->name('simpanKonfirmasiAdmin');    
     Route::get('/ruangan', [AdminController::class, 'listRuangan'])->name('listRuanganAdmin');
     Route::get('/tambahRuangan', [AdminController::class, 'tambahRuangan'])->name('tambahRuanganAdmin');
     Route::post('/ruangan', [AdminController::class, 'simpanRuangan'])->name('simpanRuanganAdmin');
@@ -62,9 +66,12 @@ Route::group(['prefix' => 'admin'], function () {
 Route::group(['prefix' => 'urt'], function () {
     Route::get('/', [UrusanRumahTanggaController::class, 'index'])->name('indexUrt');
     Route::get('/cekPengajuan', [UrusanRumahTanggaController::class, 'cekPengajuan'])->name('cekPengajuanUrt');
-    Route::get('/cekPengajuan/{id}/konfirmasi', [UrusanRumahTanggaController::class, 'konfirmasi'])->name('konfirmasiUrt');    
+    Route::get('/cekPengajuan/{id}/detail', [UrusanRumahTanggaController::class, 'detailPengajuan'])->name('detailPengajuanAdmin');    
+    Route::get('/dokumen/{filename}', [AdminController::class, 'cekDokumen'])->name('cekDokumenAdmin');    
+    Route::get('/cekPengajuan/{id}/konfirmasi', [UrusanRumahTanggaController::class, 'konfirmasiPengajuan'])->name('konfirmasiUrt');    
     Route::get('/laporan', [UrusanRumahTanggaController::class, 'laporan'])->name('laporanUrt');
 });
+
 
 // , 'middleware' => ['auth', 'cekposisi:1']
 

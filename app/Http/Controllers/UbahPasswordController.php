@@ -12,29 +12,32 @@ class UbahPasswordController extends Controller
 {
     public function index(){
         $user = User::all();
-        return view('login.lupaPassword', ['user' => $user]);
+        $users = $user->where('posisi_id', '3');
+        $dataUser = collect($user);
+        return view('login.lupaPassword', ['user' => $users]);
     }
 
-    public function ubahPassword(){
-        return view('login.ubahPassword');
-    }
+    public function requestUbahPassword(Request $request, string $id){
+        $request->validate([
+            'username' => 'required|min:3',
+            'recovery_code' => 'required|min:3|max:8',
+        ]);
 
-    public function requestUbahPassword(Request $request){
         $validasiUsername = User::where('username', $request->username)->exists();
         $validasiRecoveryCode = User::where('recovery_code', $request->recovery_code)->exists();
         if($validasiUsername && $validasiRecoveryCode){
-            $data = User::where('username', $request->username)->first();
+            $data = User::find($id);
             return view('login.ubahPassword', ['data' => $data]);
         }
     }
 
-    public function simpanPassword(Request $request, string $username){
+    public function simpanPassword(Request $request, string $id){
         $request->validate([
             'password' => 'required|min:3|max:12',
-            'confirm_password' => 'required|same:password|min:3|max:12',
+            'confirm_password' => 'required|same:password',
         ]);
 
-        User::find($username)->update ([
+        User::find($id)->update ([
             'password' => Hash::make($request->password),
         ]);
         return redirect(route('login'));
