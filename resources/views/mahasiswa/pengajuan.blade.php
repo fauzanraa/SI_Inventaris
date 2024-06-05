@@ -116,7 +116,6 @@
         
         $(document).ready(function(){
         $("#ruangan").click(function(){
-            $("#ruangan").empty();
             var dataTanggalMulai = $('#tanggal_mulai').val();
             var dataTanggalSelesai = $('#tanggal_selesai').val();
             fetch('http://127.0.0.1:8000/api/filterTanggal?tanggal_mulai=' +dataTanggalMulai+ '&tanggal_selesai=' +dataTanggalSelesai) 

@@ -16,10 +16,12 @@ return new class extends Migration
             $table->unsignedBigInteger('posisi_id')->index();
             $table->string('nama')->nullable(false);
             $table->string('nim');
-            $table->string('username')->unique();
+            $table->string('username')->unique()->nullable(false);
             $table->string('password')->nullable(false);
-            $table->string('recovery_code');
+            $table->string('recovery_code')->nullable(false);
             $table->timestamps();
+
+            $table->foreign('posisi')->references('id')->on('posisis');
         });
     }
 

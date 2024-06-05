@@ -294,3 +294,48 @@ br.normal, a.responsive{
         height: 710px;
     }
 }
+
+@media screen and (max-width: 390px) {
+    .menu-toggle{
+        margin-left: 220px;
+    }
+
+    .text-hero h1, p{
+        margin-top: -40px;
+        margin-left: -15px;
+    }
+
+    .bg-hero .search-hero{
+        margin-left: 20px;
+    }
+
+    .watch-more{
+        margin-left: 120px;
+    }
+
+    .check-class h1{
+        font-size: 25px;
+    }
+
+    .input-check .tanggal_mulai{
+        margin-left: 10px;
+    }
+
+    .input-check .submit-check{
+        margin-left: 150px;
+    }
+
+    .hint-user h1{
+        margin-left: 9px;
+    }
+
+    .hint-user p{
+        margin-left: 6px;
+    }
+
+    .footer img{
+        height: 830px;
+    }
+}
+
+

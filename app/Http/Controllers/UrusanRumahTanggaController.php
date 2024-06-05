@@ -46,18 +46,11 @@ class UrusanRumahTanggaController extends Controller
             'status_urt' => $request->status
         ]);
 
-        if ($request->status === 'tidak diterima') {
-            $note = $request->note;
-            $data = PengajuanPinjaman::find($id);
-
-            PinjamanRuangan::create([
-                'pengajuan_pinjaman_id' => $data->id,
-                'tanggal_approval' => Carbon::now()->format('Y-m-d'),
-                'catatan' => $note
-            ]);
-        } else {
-            $note = '';
-        }
+        $data = PengajuanPinjaman::find($id);
+        PinjamanRuangan::create([
+            'pengajuan_pinjaman_id' => $data->id,
+            'tanggal_approval' => Carbon::now()->format('Y-m-d'),
+        ]);
 
         return redirect('urt/cekPengajuan');
     }

@@ -139,4 +139,28 @@ ul li a{
     .menu-toggle{
         margin-left: 410px;
     }
+    
+}
+
+@media screen and (max-width: 390px) {
+    .menu-toggle{
+        margin-left: 220px;
+    }
+
+    .content{
+        margin-left: 10px;
+        width: 600px;
+    }
+
+    .form-nama, .form-tanggal-mulai, .form-tanggal-selesai{
+        width: 90%;
+    }
+
+    .form-tanggal-selesai{
+        margin-left: 15px;
+    }
+
+    .ruangan{
+        width: 53%;
+    }
 }

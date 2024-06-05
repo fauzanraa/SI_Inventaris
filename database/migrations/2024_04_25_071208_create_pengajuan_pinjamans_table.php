@@ -14,11 +14,16 @@ return new class extends Migration
         Schema::create('pengajuan_pinjamans', function (Blueprint $table) {
             $table->id('id');
             $table->unsignedBigInteger('user_id')->index();
+            $table->unsignedBigInteger('ruangan_id')->index();
             $table->date('tanggal_mulai')->nullable(false);
             $table->date('tanggal_selesai')->nullable(false);
+            $table->string('pukul')->nullable(false);
             $table->string('dokumen_pendukung')->nullable(false);
-            $table->string('status')->nullable(false);
+            $table->string('status_admin')->nullable(false);
+            $table->string('status_urt')->nullable(false);
             $table->timestamps();
+
+            $table->foreign('ruangan_id')->references('id')->on('ruangans');
         });
     }
 

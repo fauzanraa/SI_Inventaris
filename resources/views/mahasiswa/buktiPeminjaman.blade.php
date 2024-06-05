@@ -107,7 +107,7 @@
             </tr>
             <tr>
                 <td>Pukul</td>
-                <td width="525">: 19.00 - 20.00</td>
+                <td width="525">: {{$tandaTerima->pluck('pukul')->implode(',')}}</td>
             </tr>
             <tr>
                 <td>Ruangan</td>

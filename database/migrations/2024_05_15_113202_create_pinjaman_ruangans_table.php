@@ -15,7 +15,10 @@ return new class extends Migration
             $table->id('id');
             $table->unsignedBigInteger('pengajuan_pinjaman_id')->index();
             $table->date('tanggal_approval')->nullable(false);
+            $table->date('catatan')->nullable(true);
             $table->timestamps();
+
+            $table->foreign('pengajuan_pinjaman_id')->references('id')->on('pengajuan_pinjamans');
         });
     }
 
