@@ -42,6 +42,10 @@ class UrusanRumahTanggaController extends Controller
     }
     
     public function simpanKonfirmasi(Request $request, string $id) {
+        $request->validate([
+            'status' => 'required',
+        ]);
+
         PengajuanPinjaman::find($id)->update([
             'status_urt' => $request->status
         ]);

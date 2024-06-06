@@ -15,9 +15,9 @@
                         <img src="/assets/logo-jti.png" alt="logo-jti" class="logo-jti">
                     </div>
                     <div class="title">
-                        <h1 class="mt-5 mb-4">Forgot Password</h1>
+                        <h1 class="mt-5 mb-4">Change Password</h1>
                     </div>               
-                    <form action="{{url('password/'.$data->id)}}" method="POST" enctype="multipart/form-data">
+                    <form action="{{url('password/'.$data->pluck('id')->implode(','))}}" method="POST" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             {!! method_field('PUT') !!}
                             <div class="form mb-3">

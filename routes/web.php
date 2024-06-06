@@ -33,7 +33,7 @@ Route::post('/simpanRegistrasi', [RegisterController::class, 'simpanRegistrasi']
 
 Route::group(['prefix' => 'password'], function () {
 Route::get('/lupa', [UbahPasswordController::class, 'index'])->name('lupaPassword');
-Route::post('/{id}/requestUbahPass', [UbahPasswordController::class, 'requestUbahPassword'])->name('requestUbahPassword');
+Route::post('/requestUbahPass', [UbahPasswordController::class, 'requestUbahPassword'])->name('requestUbahPassword');
 Route::put('/{id}', [UbahPasswordController::class, 'simpanPassword'])->name('simpanUbahPassword');
 });
 

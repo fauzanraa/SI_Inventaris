@@ -77,26 +77,44 @@
             <div class="card-container">
                 <form action="{{route('simpanRuanganAdmin')}}" method="post" enctype="multipart/form-data">
                     {{ csrf_field() }}
-                    <h3 class="mb-5">Add Room</h3>
+                    <h3 class="mb-5">Tambah Ruangan</h3>
                     <div class="mb-3">
                         <span>Kode Ruangan</span>
-                        <input type="text" class="form-control" name="kode" placeholder="">
+                        <input type="text" class="form-control @error('kode') is-invalid @enderror" name="kode" placeholder="">
+                        @error('kode')
+                            <div class="invalid-feedback">
+                                {{$message}}
+                            </div>
+                        @enderror    
                     </div>
                     <div class="mb-3">
                         <span>Nama Ruangan</span>
-                        <input type="text" class="form-control" name="nama" placeholder="">
+                        <input type="text" class="form-control @error('nama') is-invalid @enderror" name="nama" placeholder="">
+                        @error('nama')
+                            <div class="invalid-feedback">
+                                {{$message}}
+                            </div>
+                        @enderror
                     </div>
                     <div class="mb-3">
                         <span>Lantai</span>
-                        <input type="text" class="form-control" name="lantai" placeholder="">
+                        <input type="text" class="form-control @error('lantai') is-invalid @enderror" name="lantai" placeholder="">
+                        @error('lantai')
+                            <div class="invalid-feedback">
+                                {{$message}}
+                            </div>
+                        @enderror
                     </div>
                     <div class="mb-3">
                         <span>Foto Ruangan</span>
-                        <input type="file" class="form-control" name="foto">
+                        <input type="file" class="form-control @error('foto') is-invalid @enderror" name="foto">
+                        @error('foto')
+                            <div class="invalid-feedback">
+                                {{$message}}
+                            </div>
+                        @enderror
                     </div>
-                    <div class="button-save">
-                        <button type="submit" class="btn mt-3" id="save">Save</button>
-                    </div>
+                    <button type="submit" class="btn btn-primary mt-3">Save</button>
                 </form>
                 
                 <div class="back">

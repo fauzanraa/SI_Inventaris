@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/login/stylePass.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>SI Inventaris</title>
 </head>
 <body>
@@ -17,10 +18,10 @@
                     <div class="title">
                         <h1 class="mt-5 mb-4">Forgot Password</h1>
                     </div>               
-                    <form action="{{url( '/password/' .$user->pluck('id')->implode('').'/requestUbahPass')}}" method="POST" enctype="multipart/form-data">
+                    <form action="{{route('requestUbahPassword')}}" method="POST" id="ubahPassword" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             <div class="form mb-3">
-                                <input type="text" class="form-control @error('username') is-invalid @enderror" name="username" placeholder="Username">
+                                <input type="text" class="form-control @error('username') is-invalid @enderror" name="username" id="username" placeholder="Username">
                                 @error('username')
                                     <div class="invalid-feedback">
                                         {{$message}}
@@ -28,7 +29,7 @@
                                 @enderror
                             </div>
                             <div class="form mb-3">
-                                <input type="text" class="form-control @error('recovery_code') is-invalid @enderror" name="recovery_code" placeholder="Recovery Code">
+                                <input type="text" class="form-control @error('recovery_code') is-invalid @enderror" name="recovery_code" id="recovery_code" placeholder="Recovery Code">
                                 @error('recovery_code')
                                     <div class="invalid-feedback">
                                         {{$message}}
@@ -45,6 +46,7 @@
                         </div>
                 </div>
         </div>
-    </section>   
+    </section>  
+    
 </body>
 </html>

@@ -20,4 +20,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/filterTanggal', [MahasiswaController::class, 'filterTanggal']);
+Route::get('/ambilId', [MahasiswaController::class, 'ambilId']);
 

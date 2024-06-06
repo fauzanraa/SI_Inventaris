@@ -54,16 +54,31 @@
                                     <span>Nama</span><input type="text" class="form-control" name="nama" disabled>
                                 </div>
                                 <div class="mb-3">
-                                    <span>Tanggal Mulai</span><input type="date" class="form-control" value="" id="tanggal_mulai" name="tanggal_mulai">
+                                    <span>Tanggal Mulai</span><input type="date" class="form-control @error('tanggal_mulai') is-invalid @enderror" value="" id="tanggal_mulai" name="tanggal_mulai">
+                                    @error('tanggal_mulai')
+                                    <div class="invalid-feedback">
+                                        {{$message}}
+                                    </div>
+                                @enderror
                                 </div>
                                 <div class="mb-3">
-                                    <span>Tanggal Selesai</span><input type="date" class="form-control" value="" id="tanggal_selesai" name="tanggal_selesai">
+                                    <span>Tanggal Selesai</span><input type="date" class="form-control @error('tanggal_selesai') is-invalid @enderror" value="" id="tanggal_selesai" name="tanggal_selesai">
+                                    @error('tanggal_selesai')
+                                    <div class="invalid-feedback">
+                                        {{$message}}
+                                    </div>
+                                @enderror
                                 </div>
                                 <div class="mb-3">
                                     <span>Ruangan</span>
                                     <div class="pilih-ruangan">
-                                        <select name="ruangan" id="ruangan">
+                                        <select name="ruangan" id="ruangan" class="@error('ruangan') is-invalid @enderror" >
                                             <option value="">Pilihan Ruangan</option>
+                                            @error('ruangan')
+                                                <div class="invalid-feedback">
+                                                    {{$message}}
+                                                </div>
+                                            @enderror
                                         </select>
                                     </div>
                                 </div>
@@ -79,7 +94,12 @@
                                 </div>
                                 <div class="mb-3">
                                     <span>Dokumen</span>
-                                    <input type="file" class="form-control" name="dokumen">
+                                    <input type="file" class="form-control @error('dokumen') is-invalid @enderror" name="dokumen">
+                                    @error('dokumen')
+                                        <div class="invalid-feedback">
+                                            {{$message}}
+                                        </div>
+                                    @enderror
                                 </div>
                                 <div class="button-submit">
                                     <button type="submit" id="submit" class="btn btn-secondary mt-3">Ajukan</button>
@@ -123,6 +143,7 @@
             .then(data => {
                 $.each(data, function(key, value){
                     console.log(value.nama)
+                    console.log(value.id)
                     $("#ruangan").append('<option value="' + value.id + '">' + value.nama + '</option>');
                 });
             })
