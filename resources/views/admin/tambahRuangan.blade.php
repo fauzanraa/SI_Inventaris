@@ -107,7 +107,7 @@
                     </div>
                     <div class="mb-3">
                         <span>Foto Ruangan</span>
-                        <input type="file" class="form-control @error('foto') is-invalid @enderror" name="foto">
+                        <input type="file" class="form-control @error('foto') is-invalid @enderror" name="foto[]" multiple>
                         @error('foto')
                             <div class="invalid-feedback">
                                 {{$message}}

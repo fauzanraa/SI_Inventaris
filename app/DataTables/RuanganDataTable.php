@@ -4,6 +4,7 @@ namespace App\DataTables;
 
 use App\Models\Ruangan;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
+use Illuminate\Support\Facades\Log;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Html\Button;
@@ -23,6 +24,17 @@ class RuanganDataTable extends DataTable
     {
         $ruangans = Ruangan::all();
         return (new EloquentDataTable($query))
+            // ->addColumn('images', function ($ruangan) {
+            //     $imageElements = '';
+            //     foreach ($ruangan->ruanganImages as $image) {
+            //         $imagePath = asset('storage/' . $image->filename);
+            //         // Log::info($imagePath);
+            //         $imageElements .= "<img src='$imagePath' style='width: 4rem; height:2rem;' />";
+            //         // $imageElements .= "d";
+            //     }
+
+            //     return $imageElements;
+            // })
             ->addColumn('action', function ($ruangan){
                     $btn  = 
                     '<form class="d-inline-block" method="POST" action="'. url('admin/ruangan/'.$ruangan->id).'">'

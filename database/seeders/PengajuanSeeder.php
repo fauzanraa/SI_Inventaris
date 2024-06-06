@@ -16,7 +16,7 @@ class PengajuanSeeder extends Seeder
         $data = [
             [
                 'user_id' => 1,
-                'ruangan' => '2',
+                'ruangan_id' => '2',
                 'tanggal_mulai' => '2024-05-19',
                 'tanggal_selesai' => '2024-05-19',
                 'dokumen_pendukung' => 'a',
@@ -25,7 +25,7 @@ class PengajuanSeeder extends Seeder
             ],
             [
                 'user_id' => 2,
-                'ruangan' => '4',
+                'ruangan_id' => '4',
                 'tanggal_mulai' => '2024-05-20',
                 'tanggal_selesai' => '2024-05-21',
                 'dokumen_pendukung' => 'a',

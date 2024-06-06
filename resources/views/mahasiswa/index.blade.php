@@ -66,11 +66,13 @@
         </div>
 
         <div class="content">
-            <div class="photo-class">
-                @foreach ($foto as $item)
-                    <div class="item">
-                        <img src="{{asset($item->foto)}}" alt="kelas" class="kelas1"> 
-                    </div>
+            <div class="gallery">
+                @foreach ($ruangan as $item)
+                        @foreach ($item->ruanganImages as $item)
+                        <div>
+                            <span><img src="{{asset('storage/ruangan/' . $item->filename)}}"></span>
+                        </div>
+                        @endforeach
                 @endforeach
             </div>
             
@@ -120,7 +122,7 @@
                             <p>
                                 1. Pastikan anda sudah mengecek ketersedian ruangan <br>
                                 2. Jika sudah menemukan ruangan yang ingin dipinjam, silahkan 
-                                <br class="responsive"> akses link berikut  <br>
+                                <br class="responsive"> akses link berikut : <a href="https://drive.google.com/drive/folders/1QUXEEUjUVdXiGMd75tYZ27P0d8eCBUhp?usp=sharing">https://drive.google.com/drive/folders/1QUXEEUjUVdXiGMd75tYZ27P0d8eCBUhp?usp=sharing</a>  <br>
                                 3. Isikan dokumen yang terdapat pada link tersebut <br>
                                 4. Lalu pergi ke halaman pengajuan <br>
                                 5. Nanti akan muncul form pengajuan, isi semua form sesuai 

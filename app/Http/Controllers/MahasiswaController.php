@@ -19,10 +19,9 @@ use Yajra\DataTables\Facades\DataTables;
 class MahasiswaController extends Controller
 {
     public function index(){
-        $foto = DB::select("
-                            SELECT foto FROM ruangans
-        ");
-        return view('mahasiswa.index', ['foto' => $foto]);
+        $ruangan = Ruangan::with('ruanganImages')->get();
+
+        return view('mahasiswa.index', ['ruangan' => $ruangan]);
     }
 
     public function cekRuangan(Request $request){
@@ -54,7 +53,9 @@ class MahasiswaController extends Controller
             return view('mahasiswa.cekRuangan', ['ruangan' => $ruangan]);
 
         } else {
-            $ruangan = Ruangan::all();
+            $ruangan = Ruangan::with('ruanganImages')->get();
+
+            // dd($ruangan);
             return view('mahasiswa.cekRuangan', ['ruangan' => $ruangan]);
         }
     }
@@ -201,16 +202,26 @@ class MahasiswaController extends Controller
     }
 
     public function simpanPengajuan(Request $request){
-        $dokumen = $request->file('dokumen');
-        // dd($request->file($request->tanggal_mulai));
-        $dokumenName = uniqid() . '.' . $dokumen->getClientOriginalExtension();
-        $dokumen->move(public_path('dokumen'), $dokumenName);    
+        if($request->hasFile('dokumen')) {
+            $dokumen = $request->file('dokumen');
+            // dd($request->file($request->tanggal_mulai));
+            $dokumenName = uniqid() . '.' . $dokumen->getClientOriginalExtension();
+            $dokumen->move(public_path('dokumen'), $dokumenName);   
+        }
+
+        $request->validate([
+            'tanggal_mulai' => 'required',
+            'tanggal_selesai' => 'required',
+            'ruangan_id' => 'required',
+            'dokumen_pendukung' => 'required',
+        ]);
+         
         PengajuanPinjaman::create([
             'user_id' => $request->id,
             'ruangan_id' => $request->ruangan,
             'tanggal_mulai' => $request->tanggal_mulai,
             'tanggal_selesai' => $request->tanggal_selesai,
-            'dokumen_pendukung' => $dokumenName,
+            'dokumen_pendukung' => $dokumenName ?? "",
             'status_admin' => 'Menunggu',
             'status_urt' => 'Menunggu',
         ]);
@@ -250,12 +261,10 @@ class MahasiswaController extends Controller
             WHERE 
             pr.id = '".$id."';
         ");
-        // dd($data);
         $tandaTerima = collect($data);
         
 
         return view('mahasiswa.buktiPeminjaman', ['tandaTerima' => $tandaTerima]);
     }
 
-//     SELECT * FROM ruangans where id NOT IN (SELECT pinjaman.pengajuan_pinjaman_id FROM pinjaman_ruangans AS pinjaman INNER JOIN pengajuan_pinjamans AS pengajuan ON pinjaman.pengajuan_pinjaman_id = pengajuan.id WHERE pengajuan.tanggal_mulai >= '2024-05-19' AND pengajuan.tanggal_selesai <= '2024-05-19') 
 }

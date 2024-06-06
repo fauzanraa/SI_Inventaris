@@ -36,24 +36,38 @@ class AdminController extends Controller
     }
 
     public function simpanRuangan(Request $request){
-        $foto = $request->file('foto');
-        // dd($request->kode);
-        $fotoName = uniqid() . '.' . $foto->getClientOriginalExtension();
-        $foto->move(public_path('ruangan'), $fotoName);
         $request->validate([
-            // username harus diisi, berupa string, minimal 3 karakter, dan bernilai unik di tabel m_user kolom username
             'kode' => 'required|string|min:3|unique:ruangans,kode',
-            'nama'     => 'required|string|max:100', // nama harus diisi, berupa string, dan maksimal 100 karakter
-            'lantai' => 'required|integer',          // level_id harus diisi dan berupa angka
+            'nama'     => 'required|string|max:100', 
+            'lantai' => 'required|integer',          
+        //     'foto.*' => 'required|image|mimes:jpg,jpeg,png|max:2048'
         ]);
 
-        Ruangan::create([
-            'kode' => $request->kode,
-            'nama'     => $request->nama,  
-            'lantai' => $request->lantai, 
-            'foto' =>  $fotoName
-        ]);
-        return redirect('/admin/ruangan')->with("message", "Room has ben saved");
+        // DB::transaction(function () use ($request) {
+
+            $ruangan = Ruangan::create([
+                'kode' => $request->kode,
+                'nama'     => $request->nama,  
+                'lantai' => $request->lantai, 
+            ]);
+
+            if($request->hasFile('foto')) {
+                foreach ($request->foto as $value) {
+
+                    // $fotoName = time() . '_' . $value->getClientOriginalExtension();
+
+                    // $value->move(public_path('ruangan'), $fotoName);
+                    
+                    // $foto[] = $fotoName;
+
+                    $path = $value->store('public/ruangan');
+                    $filename = basename($path);
+                    $ruangan->ruanganImages()->create(['filename' => $filename]);
+                }
+            }
+        // });
+        
+        return redirect('/admin/ruangan')->with("message", "Data ruangan berhasil ditambah");
     }
 
     public function hapus(string $id) {

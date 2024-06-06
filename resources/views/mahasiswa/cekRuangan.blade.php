@@ -80,11 +80,13 @@
                         <div class="content-ruangan">
                             <p>{{$item->kode}} | {{'Lantai ' .$item->lantai}}
                                 <br><br>
-                                <div class="photo-class">
+                                <div class="gallery">
                                     @foreach ($ruangan as $item)
-                                        <div class="item">
-                                            <img src="{{asset($item->foto)}}" alt="kelas" class="kelas1"> 
-                                        </div>
+                                            @foreach ($item->ruanganImages as $item)
+                                            <div>
+                                                <span><img src="{{asset('storage/ruangan/' . $item->filename)}}"></span>
+                                            </div>
+                                            @endforeach
                                     @endforeach
                                 </div>
                             </p>

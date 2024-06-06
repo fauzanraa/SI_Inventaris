@@ -96,7 +96,7 @@
                                     <button type="submit" id="submit" class="btn btn-secondary mt-3">Ajukan</button>
                                 </div>
                                 <div class="button-back">
-                                    <a href="" class="btn btn-secondary mt-3">Kembali</a>
+                                    <a href="{{route('indexMahasiswa')}}" class="btn btn-secondary mt-3">Kembali</a>
                                 </div>
                         </form> 
                     </div>         
@@ -132,6 +132,7 @@
             fetch('http://127.0.0.1:8000/api/filterTanggal?tanggal_mulai=' +dataTanggalMulai+ '&tanggal_selesai=' +dataTanggalSelesai) 
             .then(response => response.json())
             .then(data => {
+                $('#ruangan').html('')
                 $.each(data, function(key, value){
                     console.log(value.nama)
                     console.log(value.id)

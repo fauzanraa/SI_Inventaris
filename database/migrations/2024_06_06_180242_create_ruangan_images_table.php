@@ -11,14 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('ruangans', function (Blueprint $table) {
-            $table->id('id');
-            $table->string('kode')->unique()->nullable(false);
-            $table->string('nama')->nullable(false);
-            // $table->string('foto')->nullable(false);
-            $table->integer('lantai')->nullable(false);
+        Schema::create('ruangan_images', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('ruangan_id')->references('id')->on('ruangans')->onDelete('cascade');
+            $table->string('filename');
             $table->timestamps();
         });
+        
     }
 
     /**
@@ -26,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('ruangans');
+        Schema::dropIfExists('ruangan_images');
     }
 };

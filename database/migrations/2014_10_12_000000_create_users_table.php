@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('recovery_code')->nullable(false);
             $table->timestamps();
 
-            $table->foreign('posisi')->references('id')->on('posisis');
+            $table->foreign('posisi_id')->references('id')->on('posisis');
         });
     }
 

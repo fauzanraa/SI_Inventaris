@@ -46,7 +46,7 @@ Route::group(['prefix' => 'mahasiswa', 'middleware' => ['auth', 'cekposisi:3']],
     Route::post('/pengajuan', [MahasiswaController::class, 'filterRuangan'])->name('filterTanggal');
     Route::post('/simpanPengajuan', [MahasiswaController::class, 'simpanPengajuan'])->name('simpanPengajuanMhs');
     Route::get('/tandaTerima', [MahasiswaController::class, 'tandaTerima'])->name('tandaTerimaMhs');
-    Route::get('/{id}/buktiPeminjaman', [MahasiswaController::class, 'bukti']);
+    Route::get('/{id}/buktiPeminjaman', [MahasiswaController::class, 'bukti'])->name('buktiTandaTerima');
 });
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'cekposisi:1']], function () {
