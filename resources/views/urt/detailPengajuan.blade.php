@@ -18,7 +18,7 @@
             <nav>
                 <ul>
                     <li class="nav-item">
-                            <a href="{{ route('indexAdmin')}}" class="nav-link {{ \Route::is('/admin') ? 'active' : ''}}">
+                            <a href="{{ route('indexUrt')}}" class="nav-link {{ \Route::is('/admin') ? 'active' : ''}}">
                                 <p>
                                     <i class="nav-icon fas fa-solid fa-house"></i>
                                     <span>Dashboard</span>
@@ -26,15 +26,7 @@
                             </a>
                     </li>
                     <li class="nav-item">
-                            <a href="{{ route('listRuanganAdmin')}}" class="nav-link ">
-                                <p>
-                                    <i class="nav-icon fas fa-solid fa-calendar"></i>
-                                    <span>Ruangan</span>
-                                </p>
-                            </a>
-                    </li>
-                    <li class="nav-item">
-                            <a href="{{ route('cekPengajuanAdmin')}}" class="nav-link ">
+                            <a href="{{ route('cekPengajuanUrt')}}" class="nav-link ">
                                 <p>
                                     <i class="nav-icon fas fa-solid fa-pen-to-square"></i>
                                     <span>Konfirmasi Pengajuan</span>
@@ -42,7 +34,7 @@
                             </a>    
                     </li>
                     <li class="nav-item">
-                            <a href="{{ route('laporanAdmin')}}" class="nav-link ">
+                            <a href="{{ route('laporanUrt')}}" class="nav-link ">
                                 <p>
                                     <i class="nav-icon fas fa-reguler fa-file"></i>
                                     <span>Laporan</span>
@@ -67,7 +59,7 @@
         <div class="content">
             <div class="topbar">
                 <div class="title-content">
-                    <p>Welcome Back, Admin</p>
+                    <p>Welcome Back, Urusan Rumah Tangga</p>
                 </div>
                 <div class="logo-jti">
                     <img src="/assets/logo-jti.png">

@@ -191,10 +191,11 @@ class MahasiswaController extends Controller
         return response()->json($ruangan, Response::HTTP_OK);
     }
 
-    public function pengajuan(Request $request){
+    public function pengajuan(){
+        $user = User::where('username', Auth::user()->username)->first();
         $ruangan = Ruangan::all();
 
-        return view('mahasiswa.pengajuan', ['ruangan' => $ruangan]);
+        return view('mahasiswa.pengajuan', ['ruangan' => $ruangan, 'user' => $user]);
     }
 
     public function simpanPengajuan(Request $request){
@@ -203,12 +204,12 @@ class MahasiswaController extends Controller
         $dokumenName = uniqid() . '.' . $dokumen->getClientOriginalExtension();
         $dokumen->move(public_path('dokumen'), $dokumenName);
         PengajuanPinjaman::create([
-            'nama' => $request->nama,
-            'user_id' => '1',
+            'user_id' => DB::select("
+                SELECT id FROM users WHERE nama LIKE '".$request->nama."'
+            "),
             'ruangan' => $request->ruangan,
             'tanggal_mulai' => $request->tanggal_mulai,
             'tanggal_selesai' => $request->tanggal_selesai,
-            'pukul' => $request->pukul_mulai. '-' .$request->pukul_selesai,
             'dokumen_pendukung' => $dokumenName,
             'status_admin' => 'Menunggu',
             'status_urt' => 'Menunggu',
@@ -217,7 +218,12 @@ class MahasiswaController extends Controller
     }
 
     public function tandaTerima(TandaTerimaDataTable $dataTable){
-        return $dataTable->render('mahasiswa.tandaTerima');
+        $user = User::where('username', Auth::user()->username)->first();
+        dd($dataTable->render);
+
+        if($user == true){
+            return $dataTable->render('mahasiswa.tandaTerima');
+        }
     }
 
     public function bukti(string $id){

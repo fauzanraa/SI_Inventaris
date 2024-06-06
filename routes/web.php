@@ -20,9 +20,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/postLogin', [LoginController::class, 'postLogin'])->name('postLogin');
@@ -37,7 +37,7 @@ Route::post('/requestUbahPass', [UbahPasswordController::class, 'requestUbahPass
 Route::put('/{id}', [UbahPasswordController::class, 'simpanPassword'])->name('simpanUbahPassword');
 });
 
-Route::group(['prefix' => 'mahasiswa'], function () {
+Route::group(['prefix' => 'mahasiswa', 'middleware' => ['auth', 'cekposisi:3']], function () {
     Route::get('/', [MahasiswaController::class, 'index'])->name('indexMahasiswa');
     Route::get('/cekRuangan', [MahasiswaController::class, 'cekRuangan'])->name('cekRuanganMhs');
     Route::get('/pencarianNama', [MahasiswaController::class, 'pencarianNama'])->name('cariRuanganByNamaMhs');
@@ -49,7 +49,7 @@ Route::group(['prefix' => 'mahasiswa'], function () {
     Route::get('/{id}/buktiPeminjaman', [MahasiswaController::class, 'bukti']);
 });
 
-Route::group(['prefix' => 'admin'], function () {
+Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'cekposisi:1']], function () {
     Route::get('/', [AdminController::class, 'index'])->name('indexAdmin');
     Route::get('/cekPengajuan', [AdminController::class, 'cekPengajuan'])->name('cekPengajuanAdmin');
     Route::get('/cekPengajuan/{id}/detail', [AdminController::class, 'detailPengajuan'])->name('detailPengajuanAdmin');    
@@ -63,7 +63,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/laporan', [AdminController::class, 'laporan'])->name('laporanAdmin');
 });
 
-Route::group(['prefix' => 'urt'], function () {
+Route::group(['prefix' => 'urt', 'middleware' => ['auth', 'cekposisi:2']], function () {
     Route::get('/', [UrusanRumahTanggaController::class, 'index'])->name('indexUrt');
     Route::get('/cekPengajuan', [UrusanRumahTanggaController::class, 'cekPengajuan'])->name('cekPengajuanUrt');
     Route::get('/cekPengajuan/{id}/detail', [UrusanRumahTanggaController::class, 'detailPengajuan'])->name('detailPengajuanAdmin');    
@@ -73,5 +73,5 @@ Route::group(['prefix' => 'urt'], function () {
 });
 
 
-// , 'middleware' => ['auth', 'cekposisi:1']
+
 

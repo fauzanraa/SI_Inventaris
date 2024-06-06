@@ -51,7 +51,7 @@
                         <form action="{{route('simpanPengajuanMhs')}}" method="post" enctype="multipart/form-data">
                             {{ csrf_field() }}
                                 <div class="mb-3 mt-5">
-                                    <span>Nama</span><input type="text" class="form-control" name="nama" disabled>
+                                    <span>Nama</span><input type="text" class="form-control" name="nama" value="{{$user->nama}}" disabled>
                                 </div>
                                 <div class="mb-3">
                                     <span>Tanggal Mulai</span><input type="date" class="form-control @error('tanggal_mulai') is-invalid @enderror" value="" id="tanggal_mulai" name="tanggal_mulai">
@@ -80,16 +80,6 @@
                                                 </div>
                                             @enderror
                                         </select>
-                                    </div>
-                                </div>
-                                <div class="pukul mb-3">
-                                    <span>Pukul</span>
-                                    <div class="pukul_mulai">
-                                        <input type="text" class="form-control" value="" id="pukul_mulai" name="pukul_mulai">
-                                    </div>
-                                    <span class="range_pukul">-</span>
-                                    <div class="pukul_selesai">
-                                        <input type="text" class="form-control" value="" id="pukul_selesai" name="pukul_selesai">
                                     </div>
                                 </div>
                                 <div class="mb-3">
