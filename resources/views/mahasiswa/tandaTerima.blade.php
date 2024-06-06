@@ -46,7 +46,36 @@
         </div>
 
         <div class="content">
-            {{ $dataTable->table()}}        
+            <table class="table">
+                <thead>
+                    <tr>
+                    <th scope="col">ID Peminjaman</th>
+                    <th scope="col">Tanggal Approval</th>
+                    <th scope="col">Tanggal Mulai</th>
+                    <th scope="col">Tanggal Selesai</th>
+                    <th scope="col">Status Admin</th>
+                    <th scope="col">Status URT</th>
+                    <th scope="col">Catatan</th>
+                    <th scope="col">Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($tandaTerima as $item)
+                        <tr>
+                        <th scope="row">{{$item->pengajuan_pinjaman_id}}</th>
+                        <th scope="row">{{$item->tanggal_approval}}</th>
+                        <th scope="row">{{$item->tanggal_mulai}}</th>
+                        <th scope="row">{{$item->tanggal_selesai}}</th>
+                        <td>{{$item->status_admin}}</td>
+                        <td>{{$item->status_urt}}</td>
+                        <td>{{$item->catatan}}</td>
+                        <td><a href="'.url('/mahasiswa/'.$tandaTerima->id. '/buktiPeminjaman').'" class="btn btn-primary btn-sm"><i class="fa-regular fa-clipboard"></i></a></td>
+                        </tr>
+                        <tr>
+                    @endforeach
+                </tbody>
+            </table>
+            {{$tandaTerima->onEachSide(5)->links()}}
         </div>
     </section>
 

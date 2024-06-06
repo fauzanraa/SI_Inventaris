@@ -39,6 +39,6 @@ class RegisterController extends Controller
         
         DB::table('users')->insert($data);
         
-        return redirect(route('login'))->with('success');
+        return redirect(route('login'))->with('message', 'Berhasil membuat akun');
     }
 }

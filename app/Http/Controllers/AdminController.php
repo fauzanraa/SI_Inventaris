@@ -10,13 +10,21 @@ use App\Models\PinjamanRuangan;
 use App\Models\Ruangan;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
 use Whoops\Run;
 
 class AdminController extends Controller
 {
-    public function index(Request $request){
-        return view('admin.index', compact('request'));
+    public function index(){
+        $pengajuan = DB::select("
+                    SELECT COUNT(user_id) as notif
+                    FROM pengajuan_pinjamans
+                    WHERE status_admin = 'Menunggu';
+        ");
+        $notif = collect($pengajuan);
+
+        return view('admin.index', ['notif' => $notif]);
     }
 
     public function listRuangan(RuanganDataTable $datatable){
@@ -45,7 +53,7 @@ class AdminController extends Controller
             'lantai' => $request->lantai, 
             'foto' =>  $fotoName
         ]);
-        return redirect('/admin/ruangan')->with("message", "Success");
+        return redirect('/admin/ruangan')->with("message", "Room has ben saved");
     }
 
     public function hapus(string $id) {
@@ -59,7 +67,7 @@ class AdminController extends Controller
             $hapus = Ruangan::find($id);
             $hapus->delete();
 
-            return redirect('/admin/ruangan')->with('success', 'Data user berhasil dihapus');
+            return redirect('/admin/ruangan')->with('message', 'Data ruangan berhasil dihapus');
         } catch (\Illuminate\Database\QueryException $e) {
 
             // Jika terjadi error ketika menghapus data, redirect kembali ke halaman dengan membawa pesan error
@@ -119,7 +127,7 @@ class AdminController extends Controller
             $note = '';
         }
 
-        return redirect('admin/cekPengajuan');
+        return redirect('admin/cekPengajuan')->with('message', 'Berhasil melakukan konfirmasi');
     }
 
     public function laporan(LaporanAdminDataTable $datatable){

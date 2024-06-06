@@ -9,7 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="/fontawesome/css/all.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>SI Inventaris</title>
 </head>
 <body>
@@ -67,61 +67,13 @@
 
         <div class="content">
             <div class="photo-class">
-                <div class="item">
-                    <img src="/assets/kelas/kelas1.png" alt="kelas" class="kelas1"> 
-                </div>
-                <div class="item">
-                    <img src="/assets/kelas/kelas1.png" alt="kelas" class="kelas1"> 
-                </div>
-                <div class="item">
-                    <img src="/assets/kelas/kelas1.png" alt="kelas" class="kelas1"> 
-                </div>
-                <div class="item">
-                    <img src="/assets/kelas/kelas1.png" alt="kelas" class="kelas1"> 
-                </div>
-                <div class="item">
-                    <img src="/assets/kelas/kelas1.png" alt="kelas" class="kelas1"> 
-                </div>
-                <div class="item">
-                    <img src="/assets/kelas/kelas1.png" alt="kelas" class="kelas1"> 
-                </div>
-                <div class="item">
-                    <img src="/assets/kelas/kelas1.png" alt="kelas" class="kelas1"> 
-                </div>
-                <div class="item">
-                    <img src="/assets/kelas/kelas1.png" alt="kelas" class="kelas1"> 
-                </div>
-                <div class="item">
-                    <img src="/assets/kelas/kelas1.png" alt="kelas" class="kelas1"> 
-                </div>
-                <div class="item">
-                    <img src="/assets/kelas/kelas1.png" alt="kelas" class="kelas1"> 
-                </div>
-                <div class="item">
-                    <img src="/assets/kelas/kelas1.png" alt="kelas" class="kelas1"> 
-                </div>
-                <div class="item">
-                    <img src="/assets/kelas/kelas1.png" alt="kelas" class="kelas1"> 
-                </div>
-                <div class="item">
-                    <img src="/assets/kelas/kelas1.png" alt="kelas" class="kelas1"> 
-                </div>
-                <div class="item">
-                    <img src="/assets/kelas/kelas1.png" alt="kelas" class="kelas1"> 
-                </div>
-                <div class="item">
-                    <img src="/assets/kelas/kelas1.png" alt="kelas" class="kelas1"> 
-                </div>
-                <div class="item">
-                    <img src="/assets/kelas/kelas1.png" alt="kelas" class="kelas1"> 
-                </div>
-                <div class="item">
-                    <img src="/assets/kelas/kelas1.png" alt="kelas" class="kelas1"> 
-                </div>
-                <div class="item">
-                    <img src="/assets/kelas/kelas1.png" alt="kelas" class="kelas1"> 
-                </div>
+                @foreach ($foto as $item)
+                    <div class="item">
+                        <img src="{{asset($item->foto)}}" alt="kelas" class="kelas1"> 
+                    </div>
+                @endforeach
             </div>
+            
             <div class="watch-more mt-4" >
                 <a href="{{route('cekRuanganMhs')}}">Lihat lebih banyak</a>
             </div>
@@ -140,13 +92,13 @@
                             <div class="tanggal_mulai">
                                 <div class="mb-3">
                                     <label for="tanggal_mulai" class="form-label">Tanggal Mulai</label>
-                                    <input type="date" name="tanggal_mulai" class="form-control">
+                                    <input type="date" name="tanggal_mulai" id="tanggal_mulai" class="form-control">
                                 </div>
                             </div>
                             <div class="tanggal_selesai">
                                 <div class="mb-3">
                                     <label for="tanggal_selesai" class="form-label">Tanggal Selesai</label>
-                                    <input type="date" name="tanggal_selesai" class="form-control">
+                                    <input type="date" name="tanggal_selesai" id="tanggal_selesai" class="form-control">
                                 </div>
                             </div>
                             <div class="submit-check">
@@ -190,12 +142,35 @@
         </div>
     </section>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    @if (Session::has('message'))
+        <script>
+            toastr.success("{{ Session::get('message')}}");
+        </script>
+    @endif
+
     <script>
         $(document).ready(function () {
             $(".menu-toggle").click(function () {
                 $('nav').toggleClass('active');
             })
         })
+    </script>
+
+    <script>
+        var inputTanggalMulai = document.getElementById('tanggal_mulai');
+        var inputTanggalSelesai = document.getElementById('tanggal_selesai');
+
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = today.getFullYear();
+        var tanggalSekarang = yyyy + '-' + mm + '-' + dd;
+
+        // Set nilai minimum pada elemen input tanggal
+        inputTanggalMulai.setAttribute('min', tanggalSekarang);
+        inputTanggalSelesai.setAttribute('min', tanggalSekarang);
     </script>
 </body>
 </html>

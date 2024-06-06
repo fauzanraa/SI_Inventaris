@@ -47,14 +47,25 @@
             <div class="filter">
                 <form action="{{route('cekRuanganMhs')}}" method="GET" enctype="multipart/form-data">
                     {{ csrf_field() }}
+                    <div class="title-filter">
+                        <span>Filter Berdasarkan :</span>
+                    </div>
+                    <div class="filterBy">
+                        <span>Nama :</span>
+                        <span class="date">Tanggal :</span>
+                    </div>
+                    <div class="filterDate">
+                        <span class="start-date">Tanggal Mulai</span>
+                        <span class="end-date">Tanggal Selesai</span>
+                    </div>
                     <div class="form-nama mb-3">
                         <input type="text" class="form-control" id="filter_nama" name="filter_nama" placeholder="Cari Ruangan">
                     </div>
                     <div class="form-tanggal-mulai mb-3">
-                        <input type="tezt" class="form-mulai form-control" id="filter_tanggal_mulai" name="filter_tanggal_mulai" placeholder="Tanggal Mulai" onfocus="this.type='date'">
+                        <input type="date" class="form-mulai form-control" id="filter_tanggal_mulai" name="filter_tanggal_mulai" placeholder="Tanggal Mulai" onfocus="this.type='date'">
                     </div>
                     <div class="form-tanggal-selesai mb-3">
-                        <input type="text" class="form-control" id="filter_tanggal_selesai" name="filter_tanggal_selesai" placeholder="Tanggal Selesai" onfocus="this.type='date'">
+                        <input type="date" class="form-control" id="filter_tanggal_selesai" name="filter_tanggal_selesai" placeholder="Tanggal Selesai" onfocus="this.type='date'">
                     </div>
                     <button type="submit" class="btn btn-primary" hidden>Submit</button>
                 </form>
@@ -69,7 +80,13 @@
                         <div class="content-ruangan">
                             <p>{{$item->kode}} | {{'Lantai ' .$item->lantai}}
                                 <br><br>
-                                <img src="{{ asset('ruangan/' .$item->foto) }}" height="15%" width="50%">
+                                <div class="photo-class">
+                                    @foreach ($ruangan as $item)
+                                        <div class="item">
+                                            <img src="{{asset($item->foto)}}" alt="kelas" class="kelas1"> 
+                                        </div>
+                                    @endforeach
+                                </div>
                             </p>
                         </div>
                     </li>
@@ -116,6 +133,21 @@
                 });
             });
         });
+    </script>
+
+    <script>
+        var inputTanggalMulai = document.getElementById('filter_tanggal_mulai');
+        var inputTanggalSelesai = document.getElementById('filter_tanggal_selesai');
+
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = today.getFullYear();
+        var tanggalSekarang = yyyy + '-' + mm + '-' + dd;
+
+        // Set nilai minimum pada elemen input tanggal
+        inputTanggalMulai.setAttribute('min', tanggalSekarang);
+        inputTanggalSelesai.setAttribute('min', tanggalSekarang);
     </script>
 </body>
 </html>

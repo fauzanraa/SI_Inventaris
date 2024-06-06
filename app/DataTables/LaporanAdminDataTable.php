@@ -23,7 +23,7 @@ class LaporanAdminDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('action', 'laporanadmin.action')
+            ->addColumn('aksi', 'laporanadmin.aksi')
             ->setRowId('id');
     }
 

@@ -20,19 +20,17 @@ class LoginController extends Controller
 
         if(Auth::attempt($request->only('username','password'))){
             if(auth()->user()->posisi_id == 1){
-                Alert::success('Success Title', 'Success Message');
-                return redirect(route('indexAdmin'))->with('message', 'Login Succesfully');
+                return redirect(route('indexAdmin'))->with('message', 'Berhasil Login');
             }
             if(auth()->user()->posisi_id == 2){
-                return redirect(route('indexUrt'))->with('message', 'Login Succesfully');
+                return redirect(route('indexUrt'))->with('message', 'Berhasil Login');
             }
             if(auth()->user()->posisi_id == 3){
-                Alert::success('Success Title', 'Success Message');
-                return redirect(route('indexMahasiswa'));
+                return redirect(route('indexMahasiswa'))->with('message', 'Berhasil Login');
             }
-            // dd(auth()->user()->level_user);
+        } else{
+            return redirect(route('login'))->with('error', 'Gagal Login, masukkan Username dan Password dengan benar');
         }
-        return redirect(route('login'));
     }
 
     public function logOut(){

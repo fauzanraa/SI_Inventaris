@@ -4,6 +4,7 @@ body{
     background: url(/assets/bg-user.png);
     background-size: cover;
     background-repeat: no-repeat;
+    box-sizing: border-box;
 }
 
 .mahasiswa{
@@ -92,7 +93,7 @@ ul li a{
 .photo-class{
     margin-top: 20px;
     margin-left: 10px;
-    max-height: 120px;
+    max-height: 200px;
     border: 1px solid #ddd;
     display: flex;
     overflow-x: auto;
@@ -108,7 +109,7 @@ ul li a{
     line-height: 110px;
     text-align: center;
     background-color: #ddd;
-    margin-right: 2px;
+    margin-right: 50px;
 }
 
 .photo-class img{

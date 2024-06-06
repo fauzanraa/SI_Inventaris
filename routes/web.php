@@ -66,9 +66,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'cekposisi:1']], fun
 Route::group(['prefix' => 'urt', 'middleware' => ['auth', 'cekposisi:2']], function () {
     Route::get('/', [UrusanRumahTanggaController::class, 'index'])->name('indexUrt');
     Route::get('/cekPengajuan', [UrusanRumahTanggaController::class, 'cekPengajuan'])->name('cekPengajuanUrt');
-    Route::get('/cekPengajuan/{id}/detail', [UrusanRumahTanggaController::class, 'detailPengajuan'])->name('detailPengajuanAdmin');    
-    Route::get('/dokumen/{filename}', [AdminController::class, 'cekDokumen'])->name('cekDokumenAdmin');    
+    Route::get('/cekPengajuan/{id}/detail', [UrusanRumahTanggaController::class, 'detailPengajuan'])->name('detailPengajuanUrt');    
+    Route::get('/dokumen/{filename}', [UrusanRumahTanggaController::class, 'cekDokumen'])->name('cekDokumenUrt');    
     Route::get('/cekPengajuan/{id}/konfirmasi', [UrusanRumahTanggaController::class, 'konfirmasiPengajuan'])->name('konfirmasiUrt');    
+    Route::put('/cekPengajuan/{id}', [UrusanRumahTanggaController::class, 'simpanKonfirmasi'])->name('simpanKonfirmasiUrt');    
     Route::get('/laporan', [UrusanRumahTanggaController::class, 'laporan'])->name('laporanUrt');
 });
 

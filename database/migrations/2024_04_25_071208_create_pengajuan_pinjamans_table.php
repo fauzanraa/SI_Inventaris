@@ -17,13 +17,12 @@ return new class extends Migration
             $table->unsignedBigInteger('ruangan_id')->index();
             $table->date('tanggal_mulai')->nullable(false);
             $table->date('tanggal_selesai')->nullable(false);
-            $table->string('pukul')->nullable(false);
             $table->string('dokumen_pendukung')->nullable(false);
             $table->string('status_admin')->nullable(false);
             $table->string('status_urt')->nullable(false);
             $table->timestamps();
 
-            $table->foreign('ruangan_id')->references('id')->on('ruangans');
+            // $table->foreign('ruangan_id')->references('id')->on('ruangans');
         });
     }
 

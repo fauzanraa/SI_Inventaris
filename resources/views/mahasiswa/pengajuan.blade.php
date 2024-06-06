@@ -53,6 +53,7 @@
                                 <div class="mb-3 mt-5">
                                     <span>Nama</span><input type="text" class="form-control" name="nama" value="{{$user->nama}}" disabled>
                                 </div>
+                                <span hidden>Id</span><input type="text" class="form-control" name="id" value="{{$user->id}}" hidden>
                                 <div class="mb-3">
                                     <span>Tanggal Mulai</span><input type="date" class="form-control @error('tanggal_mulai') is-invalid @enderror" value="" id="tanggal_mulai" name="tanggal_mulai">
                                     @error('tanggal_mulai')
@@ -72,7 +73,7 @@
                                 <div class="mb-3">
                                     <span>Ruangan</span>
                                     <div class="pilih-ruangan">
-                                        <select name="ruangan" id="ruangan" class="@error('ruangan') is-invalid @enderror" >
+                                        <select name="ruangan" id="ruangan" class="form-select @error('ruangan') is-invalid @enderror" >
                                             <option value="">Pilihan Ruangan</option>
                                             @error('ruangan')
                                                 <div class="invalid-feedback">
@@ -141,5 +142,28 @@
         });
         });
     </script>
+
+    <script>
+        var inputTanggalMulai = document.getElementById('tanggal_mulai');
+        var inputTanggalSelesai = document.getElementById('tanggal_selesai');
+
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = today.getFullYear();
+        var tanggalSekarang = yyyy + '-' + mm + '-' + dd;
+
+        // Set nilai minimum pada elemen input tanggal
+        inputTanggalMulai.setAttribute('min', tanggalSekarang);
+        inputTanggalSelesai.setAttribute('min', tanggalSekarang);
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    @if (Session::has('message'))
+        <script>
+            toastr.success("{{ Session::get('message')}}", {timeOut:1200});
+        </script>
+    @endif
 </body>
 </html>

@@ -8,11 +8,19 @@ use App\Models\PengajuanPinjaman;
 use App\Models\PinjamanRuangan;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class UrusanRumahTanggaController extends Controller
 {
-    public function index(Request $request){
-        return view('urt.index', compact('request'));
+    public function index(){
+        $pengajuan = DB::select("
+                    SELECT COUNT(user_id) as notif
+                    FROM pengajuan_pinjamans
+                    WHERE status_admin = 'Diterima' AND status_urt = 'Menunggu';
+        ");
+        $notif = collect($pengajuan);
+
+        return view('urt.index', ['notif' => $notif]);
     }
 
     public function cekPengajuan(PengajuanUrtDataTable $datatable){
@@ -54,9 +62,10 @@ class UrusanRumahTanggaController extends Controller
         PinjamanRuangan::create([
             'pengajuan_pinjaman_id' => $data->id,
             'tanggal_approval' => Carbon::now()->format('Y-m-d'),
+            'catatan' => 'Bisa Dipakai'
         ]);
 
-        return redirect('urt/cekPengajuan');
+        return redirect('urt/cekPengajuan')->with('message', 'Konfirmasi berhasil dilakukan');
     }
 
     public function laporan(LaporanUrtDataTable $datatable){

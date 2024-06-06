@@ -54,6 +54,13 @@ body{
     display: none;
 }
 
+.nav-link.active {
+    background-color: #41439A;  
+    height: 50px;
+    border-radius: 10px;
+    color: white;
+}
+
 .content{
     background-color: white;
     float: right;

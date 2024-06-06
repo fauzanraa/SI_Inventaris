@@ -18,7 +18,7 @@
             <nav>
                 <ul>
                     <li class="nav-item">
-                            <a href="{{ route('indexUrt')}}" class="nav-link {{ \Route::is('/admin') ? 'active' : ''}}">
+                            <a href="{{ route('indexUrt')}}" class="nav-link ">
                                 <p>
                                     <i class="nav-icon fas fa-solid fa-house"></i>
                                     <span>Dashboard</span>
@@ -34,7 +34,7 @@
                             </a>    
                     </li>
                     <li class="nav-item">
-                            <a href="{{ route('laporanUrt')}}" class="nav-link ">
+                            <a href="{{ route('laporanUrt')}}" class="nav-link {{ \Request::is('urt*') ? 'active' : ''}}">
                                 <p>
                                     <i class="nav-icon fas fa-reguler fa-file"></i>
                                     <span>Laporan</span>

@@ -10,6 +10,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="/fontawesome/css/all.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <title>SI Inventaris</title>
 </head>
 <body class="bg-body-tertiary">
@@ -18,7 +19,7 @@
             <nav>
                 <ul>
                     <li class="nav-item">
-                            <a href="{{ route('indexUrt')}}" class="nav-link {{ \Route::is('/admin') ? 'active' : ''}}">
+                            <a href="{{ route('indexUrt')}}" class="nav-link">
                                 <p>
                                     <i class="nav-icon fas fa-solid fa-house"></i>
                                     <span>Dashboard</span>
@@ -26,7 +27,7 @@
                             </a>
                     </li>
                     <li class="nav-item">
-                            <a href="{{ route('cekPengajuanUrt')}}" class="nav-link ">
+                            <a href="{{ route('cekPengajuanUrt')}}" class="nav-link {{ \Request::is('urt*') ? 'active' : ''}}">
                                 <p>
                                     <i class="nav-icon fas fa-solid fa-pen-to-square"></i>
                                     <span>Konfirmasi Pengajuan</span>
@@ -59,7 +60,7 @@
         <div class="content">
             <div class="topbar">
                 <div class="title-content">
-                    <p>Welcome Back, Urusan Rumah Tangga</p>
+                    <p>Selamat Datang, Urusan Rumah Tangga</p>
                 </div>
                 <div class="logo-jti">
                     <img src="/assets/logo-jti.png">
@@ -75,6 +76,17 @@
             </div>
         </div>
     </section>
+
+    @if (Session::has('message'))
+        <script>
+            Swal.fire({
+                title: "{{Session::get('message')}}",
+                icon: "success",
+                showConfirmButton: false,
+                timer: 2000
+            });
+        </script>
+    @endif
 
     @push('scripts')
         {{$dataTable->scripts(attributes: ['type' => 'module'])}}

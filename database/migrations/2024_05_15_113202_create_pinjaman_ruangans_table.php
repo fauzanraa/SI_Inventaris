@@ -18,7 +18,7 @@ return new class extends Migration
             $table->date('catatan')->nullable(true);
             $table->timestamps();
 
-            $table->foreign('pengajuan_pinjaman_id')->references('id')->on('pengajuan_pinjamans');
+            // $table->foreign('pengajuan_pinjaman_id')->references('id')->on('pengajuan_pinjamans');
         });
     }
 

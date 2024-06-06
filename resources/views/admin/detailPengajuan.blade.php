@@ -18,7 +18,7 @@
             <nav>
                 <ul>
                     <li class="nav-item">
-                            <a href="{{ route('indexAdmin')}}" class="nav-link {{ \Route::is('/admin') ? 'active' : ''}}">
+                            <a href="{{ route('indexAdmin')}}" class="nav-link">
                                 <p>
                                     <i class="nav-icon fas fa-solid fa-house"></i>
                                     <span>Dashboard</span>
@@ -34,7 +34,7 @@
                             </a>
                     </li>
                     <li class="nav-item">
-                            <a href="{{ route('cekPengajuanAdmin')}}" class="nav-link ">
+                            <a href="{{ route('cekPengajuanAdmin')}}" class="nav-link {{ \Request::is('admin*') ? 'active' : ''}}">
                                 <p>
                                     <i class="nav-icon fas fa-solid fa-pen-to-square"></i>
                                     <span>Konfirmasi Pengajuan</span>
@@ -67,7 +67,7 @@
         <div class="content">
             <div class="topbar">
                 <div class="title-content">
-                    <p>Welcome Back, Admin</p>
+                    <p>Selamat Datang, Admin</p>
                 </div>
                 <div class="logo-jti">
                     <img src="/assets/logo-jti.png">
@@ -78,7 +78,7 @@
 
             <div class="card-container">
                 <div class="main-content">
-                    <h2>Details</h2>
+                    <h2>Detail Pengajuan</h2>
                     <br>
                     <table class="table table-bordered table-striped table-hover table-sm">
                         <tr>
@@ -98,15 +98,11 @@
                             <td>{{ $data->tanggal_selesai }}</td>
                         </tr>
                         <tr>
-                            <th>Pukul</th>
-                            <td></td>
-                        </tr>
-                        <tr>
                             <th>Dokumen</th>
                             <td><a href="{{ asset('/admin/dokumen/' .$data->dokumen_pendukung) }}">{{ $data->dokumen_pendukung }}</a></td>
                         </tr>
                     </table>
-                    <a href="{{ route('cekPengajuanAdmin') }}" class="btn btn-sm btn-default mt-2">Back</a>
+                    <a href="{{ route('cekPengajuanAdmin') }}" class="btn btn-sm btn-default mt-2">Kembali</a>
                 </div>
                 </div>
             </div>

@@ -54,6 +54,14 @@ body{
     display: none;
 }
 
+.nav-link.active {
+    background-color: #41439A;  
+    height: 50px;
+    border-radius: 10px;
+    color: white;
+}
+
+
 .content{
     background-color: white;
     float: right;
@@ -102,7 +110,7 @@ body{
 .notif-pengajuan p.count-notif{
     width: 30px;
     height: 30px;
-    padding-left: 13px;
+    padding-left: 10px;
     padding-top: 4px;
     background-color: white;
 }

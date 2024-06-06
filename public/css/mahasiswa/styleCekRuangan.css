@@ -87,6 +87,27 @@ ul li a{
     width: 255px;   
 }
 
+.title-filter, .filterBy{
+    margin-left: 2%;
+    font-weight: 600;
+}
+
+.filterBy span.date{
+    margin-left: 45%;
+}
+
+.filterDate{
+    font-weight: 500;
+}
+
+.filterDate span.start-date{
+    margin-left: 51.3%;
+}
+
+.filterDate span.end-date{
+    margin-left: 14%;
+}
+
 .form-tanggal-mulai{
     display: inline-block;
 }
@@ -171,6 +192,32 @@ input[type="checkbox"]{
 
 .ruangan input[type="checkbox"]:checked + label::before{
     content: '-';
+}
+
+.photo-class{
+    margin-top: 20px;
+    margin-left: 10px;
+    max-height: 200px;
+    border: 1px solid #ddd;
+    display: flex;
+    overflow-x: auto;
+}
+
+.photo-class::-webkit-scrollbar{
+    width: 0;
+}
+
+.photo-class .item{
+    min-width: 110px;
+    height: 110px;
+    line-height: 110px;
+    text-align: center;
+    background-color: #ddd;
+    margin-right: 50px;
+}
+
+.photo-class img{
+    height: 150px;
 }
 
 @media screen and (max-width: 812px) {

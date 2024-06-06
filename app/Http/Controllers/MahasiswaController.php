@@ -19,8 +19,10 @@ use Yajra\DataTables\Facades\DataTables;
 class MahasiswaController extends Controller
 {
     public function index(){
-        // $data = User::where('id', Auth::user()->id)->first();
-        return view('mahasiswa.index');
+        $foto = DB::select("
+                            SELECT foto FROM ruangans
+        ");
+        return view('mahasiswa.index', ['foto' => $foto]);
     }
 
     public function cekRuangan(Request $request){
@@ -202,28 +204,31 @@ class MahasiswaController extends Controller
         $dokumen = $request->file('dokumen');
         // dd($request->file($request->tanggal_mulai));
         $dokumenName = uniqid() . '.' . $dokumen->getClientOriginalExtension();
-        $dokumen->move(public_path('dokumen'), $dokumenName);
+        $dokumen->move(public_path('dokumen'), $dokumenName);    
         PengajuanPinjaman::create([
-            'user_id' => DB::select("
-                SELECT id FROM users WHERE nama LIKE '".$request->nama."'
-            "),
-            'ruangan' => $request->ruangan,
+            'user_id' => $request->id,
+            'ruangan_id' => $request->ruangan,
             'tanggal_mulai' => $request->tanggal_mulai,
             'tanggal_selesai' => $request->tanggal_selesai,
             'dokumen_pendukung' => $dokumenName,
             'status_admin' => 'Menunggu',
             'status_urt' => 'Menunggu',
         ]);
-        return redirect(route('indexMahasiswa'));
+        return redirect(route('pengajuanMhs'))->with('message', 'Berhasil melakukan pengajuan');
     }
 
     public function tandaTerima(TandaTerimaDataTable $dataTable){
         $user = User::where('username', Auth::user()->username)->first();
-        dd($dataTable->render);
+        $userId = $user->id;
 
-        if($user == true){
-            return $dataTable->render('mahasiswa.tandaTerima');
-        }
+        $tandaTerima = DB::table('pinjaman_ruangans as pr')
+                        ->select('pr.*', 'pp.tanggal_mulai', 'pp.tanggal_selesai', 'pp.status_admin', 'pp.status_urt')
+                        ->join('pengajuan_pinjamans as pp', 'pr.pengajuan_pinjaman_id', '=', 'pp.id')
+                        ->join('users as u', 'pp.user_id', '=', 'u.id')
+                        ->where('u.id', $user->id)
+                        ->paginate(10);
+
+        return $dataTable->render('mahasiswa.tandaTerima', ['tandaTerima' => $tandaTerima]);
     }
 
     public function bukti(string $id){

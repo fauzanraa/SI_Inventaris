@@ -30,9 +30,9 @@ class UbahPasswordController extends Controller
                 WHERE username LIKE '%".$username."%'
             ");
             $datas = collect($data);
-            return view('login.ubahPassword', ['data' => $datas]);
+            return view('login.ubahPassword', ['data' => $datas])->with('message', 'User ditemukan, silahkan ganti password');
         } else {
-            return view('login.lupaPassword');
+            return view('login.lupaPassword')->with('error', 'User tidak ditemukan');
         }
     }
 
@@ -45,6 +45,6 @@ class UbahPasswordController extends Controller
         User::find($username)->update ([
             'password' => Hash::make($request->password),
         ]);
-        return redirect(route('login'));
+        return redirect(route('login'))->with('message', 'Berhasil ubah password, silahkan masuk');
     }
 }

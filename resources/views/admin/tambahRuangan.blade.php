@@ -16,7 +16,7 @@
             <nav>
                 <ul>
                     <li class="nav-item">
-                            <a href="{{ route('indexAdmin')}}" class="nav-link {{ \Route::is('/admin') ? 'active' : ''}}">
+                            <a href="{{ route('indexAdmin')}}" class="nav-link">
                                 <p>
                                     <i class="nav-icon fas fa-solid fa-house"></i>
                                     <span>Dashboard</span>
@@ -24,7 +24,7 @@
                             </a>
                     </li>
                     <li class="nav-item">
-                            <a href="{{ route('listRuanganAdmin')}}" class="nav-link ">
+                            <a href="{{ route('listRuanganAdmin')}}" class="nav-link {{ \Request::is('admin*') ? 'active' : ''}}">
                                 <p>
                                     <i class="nav-icon fas fa-solid fa-calendar"></i>
                                     <span>Ruangan</span>
@@ -65,7 +65,7 @@
         <div class="content">
             <div class="topbar">
                 <div class="title-content">
-                    <p>Welcome Back Admin</p>
+                    <p>Selamat Datang, Admin</p>
                 </div>
                 <div class="logo-jti">
                     <img src="/assets/logo-jti.png" alt="">
@@ -114,7 +114,9 @@
                             </div>
                         @enderror
                     </div>
-                    <button type="submit" class="btn btn-primary mt-3">Save</button>
+                    <div class="button-save">
+                        <button type="submit" class="btn mt-3">Simpan</button>
+                    </div>
                 </form>
                 
                 <div class="back">
