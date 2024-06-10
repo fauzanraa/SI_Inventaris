@@ -7,6 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="/fontawesome/css/all.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>SI Inventaris</title>
 </head>
 <body>
@@ -73,7 +74,7 @@
                                 <div class="mb-3">
                                     <span>Ruangan</span>
                                     <div class="pilih-ruangan">
-                                        <select name="ruangan" id="ruangan" class="form-select @error('ruangan') is-invalid @enderror" >
+                                        <select name="ruangan" id="ruangan" class="input-ruangan form-select @error('ruangan') is-invalid @enderror" >
                                             <option value="">Pilihan Ruangan</option>
                                             @error('ruangan')
                                                 <div class="invalid-feedback">
@@ -132,7 +133,7 @@
             fetch('http://127.0.0.1:8000/api/filterTanggal?tanggal_mulai=' +dataTanggalMulai+ '&tanggal_selesai=' +dataTanggalSelesai) 
             .then(response => response.json())
             .then(data => {
-                $('#ruangan').html('')
+                // $('#ruangan').html('')
                 $.each(data, function(key, value){
                     console.log(value.nama)
                     console.log(value.id)
@@ -166,5 +167,12 @@
             toastr.success("{{ Session::get('message')}}", {timeOut:1200});
         </script>
     @endif
+
+    @if (Session::has('error'))
+        <script>
+            toastr.warning("{{ Session::get('error')}}", {timeOut:1200});
+        </script>
+    @endif
+
 </body>
 </html>

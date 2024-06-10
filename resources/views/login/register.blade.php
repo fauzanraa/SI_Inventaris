@@ -30,7 +30,7 @@
                                 @enderror
                             </div>
                             <div class="form mb-3">
-                                <input type="text" class="form-control @error('nim') is-invalid @enderror" name="nim" placeholder="NIM"> 
+                                <input type="text" class="form-control @error('nim') is-invalid @enderror" name="nim" pattern="/d*" inputmode="numeric" placeholder="NIM"> 
                                 @error('nim')
                                     <div class="invalid-feedback">
                                         {{$message}}

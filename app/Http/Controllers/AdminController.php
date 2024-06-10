@@ -124,7 +124,7 @@ class AdminController extends Controller
             'status_admin' => $request->status
         ]);
 
-        if ($request->status === 'tidak diterima') {
+        if ($request->status === 'Tidak Diterima') {
             $note = $request->note;
             $data = PengajuanPinjaman::find($id);
 
@@ -135,7 +135,7 @@ class AdminController extends Controller
             PinjamanRuangan::create([
                 'pengajuan_pinjaman_id' => $data->id,
                 'tanggal_approval' => Carbon::now()->format('Y-m-d'),
-                'catatan' => $note
+                'catatan' => $request->note
             ]);
         } else {
             $note = '';

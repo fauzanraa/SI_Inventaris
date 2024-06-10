@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('status_urt')->nullable(false);
             $table->timestamps();
 
-            // $table->foreign('ruangan_id')->references('id')->on('ruangans');
+            $table->foreign('ruangan_id')->references('id')->on('ruangans');
         });
     }
 

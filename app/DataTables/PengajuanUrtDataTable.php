@@ -31,7 +31,7 @@ class PengajuanUrtDataTable extends DataTable
                         '; 
                         return $btn1 . $btn2;
 
-                    }  if ($pinjaman->status_admin === 'Diterima' && $pinjaman->status_urt === 'Diterima' || $pinjaman->status_admin === 'Menunggu') {
+                    }  if ($pinjaman->status_admin === 'Diterima' && $pinjaman->status_urt === 'Diterima' || $pinjaman->status_admin === 'Menunggu' || $pinjaman->status_admin === 'Tidak Diterima' && $pinjaman->status_urt === 'Tidak Diterima') {
                         $btn1 = '<a href="'.url('urt/cekPengajuan/' . $pinjaman->id. '/detail').'" class="btn btn-primary"><i class="fa-solid fa-eye"></i></a> ';
                         $btn2  = '
                             <a href="'.url('urt/cekPengajuan/' . $pinjaman->id. '/konfirmasi').'" class="btn btn-success disabled"><i class="fa-solid fa-check"></i></a> 

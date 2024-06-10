@@ -69,7 +69,11 @@
                         <td>{{$item->status_admin}}</td>
                         <td>{{$item->status_urt}}</td>
                         <td>{{$item->catatan}}</td>
-                        <td><a href="'.url('/mahasiswa/'.$tandaTerima->id. '/buktiPeminjaman').'" class="btn btn-primary btn-sm"><i class="fa-regular fa-clipboard"></i></a></td>
+                        @if ($item->status_admin === 'Diterima')
+                            <td><a href={{ url('mahasiswa/'. "$item->id" .'/buktiPeminjaman')}} class="btn btn-primary btn-sm"><i class="fa-regular fa-clipboard"></i></a></td>
+                        @elseif ($item->status_admin === 'Tidak Diterima')
+                            <td><a href={{ url('mahasiswa/'. "$item->id" .'/buktiPeminjaman')}} class="btn btn-primary btn-sm disabled"><i class="fa-regular fa-clipboard"></i></a></td>                               
+                        @endif
                         </tr>
                         <tr>
                     @endforeach

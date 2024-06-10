@@ -72,6 +72,7 @@
             </div>
             
             <div id="list_ruangan" class="list_ruangan">
+                <input type="hidden" name="_token" value="{{csrf_token()}}">
                 @foreach ($ruangan as $item)
                 <ul class="ruangan" id="ruangan">
                     <li>
@@ -80,15 +81,13 @@
                         <div class="content-ruangan">
                             <p>{{$item->kode}} | {{'Lantai ' .$item->lantai}}
                                 <br><br>
-                                <div class="gallery">
-                                    @foreach ($ruangan as $item)
-                                            @foreach ($item->ruanganImages as $item)
-                                            <div>
-                                                <span><img src="{{asset('storage/ruangan/' . $item->filename)}}"></span>
-                                            </div>
-                                            @endforeach
+                                {{-- <div class="gallery">
+                                    @foreach ($item->ruanganImages as $item)
+                                        <div>
+                                            <span><img src="{{asset('storage/ruangan/' . $item->filename)}}"></span>
+                                        </div>
                                     @endforeach
-                                </div>
+                                </div> --}}
                             </p>
                         </div>
                     </li>
