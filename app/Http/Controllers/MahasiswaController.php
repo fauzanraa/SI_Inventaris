@@ -160,18 +160,6 @@ class MahasiswaController extends Controller
         }
     }
 
-    public function detailRuangan(Request $request){
-        $ruangan = new Ruangan;
-
-        if ($request->get('search')) {
-            $ruangan = $ruangan->where('name', 'LIKE', '%' .$request->get('search'). '%');
-        }
-
-        $ruangan = $ruangan->get();
-
-        return view('mahasiswa.cekRuangan', compact('ruangan'));
-    }
-
     public function filterTanggal(Request $request){
         $inputTanggalMulai = $request->query('tanggal_mulai');
         $inputTanggalSelesai = $request->query('tanggal_selesai');
