@@ -127,20 +127,28 @@
         // });
         
         $(document).ready(function(){
-        $("#ruangan").click(function(){
+
+        $('#tanggal_selesai').on('change', () => {
             var dataTanggalMulai = $('#tanggal_mulai').val();
             var dataTanggalSelesai = $('#tanggal_selesai').val();
             fetch('http://127.0.0.1:8000/api/filterTanggal?tanggal_mulai=' +dataTanggalMulai+ '&tanggal_selesai=' +dataTanggalSelesai) 
             .then(response => response.json())
             .then(data => {
-                // $('#ruangan').html('')
+                $('#ruangan').html('')
+                console.log(data);
                 $.each(data, function(key, value){
-                    console.log(value.nama)
-                    console.log(value.id)
+                    // console.log(value.nama)
+                    // console.log(value.id)
                     $("#ruangan").append('<option value="' + value.id + '">' + value.nama + '</option>');
                 });
             })
-                .catch(error => console.error('Error:', error));
+            .catch(error => console.error('Error:', error));
+        })
+
+        $("#ruangan").click(function(){
+            
+            
+            
         });
         });
     </script>

@@ -15,36 +15,44 @@ class UbahPasswordController extends Controller
         return view('login.lupaPassword');
     }
 
+    public function requestUbahPasswordView() {
+        return view('login.ubahPassword');
+    }
+
     public function requestUbahPassword(Request $request){
         $request->validate([
             'username' => 'required|min:3',
             'recovery_code' => 'required|min:3|max:8',
         ]);
 
+        // dd($request->all());
+
         $username = $request->username;
         $validasiUsername = User::where('username', $request->username)->exists();
         $validasiRecoveryCode = User::where('recovery_code', $request->recovery_code)->exists();
         if($validasiUsername && $validasiRecoveryCode){
-            $data = DB::select("
+            $datas = DB::select("
                 SELECT id FROM users 
                 WHERE username LIKE '%".$username."%'
             ");
-            $datas = collect($data);
-            return view('login.ubahPassword', ['data' => $datas])->with('message', 'User ditemukan, silahkan ganti password');
+            $data = collect($datas);
+
+            return view('login.ubahPassword', ['data'=> $data])->with('message', 'User ditemukan, silahkan ganti password');
         } else {
             return view('login.lupaPassword')->with('error', 'User tidak ditemukan');
         }
     }
 
-    public function simpanPassword(Request $request, string $username){
+    public function simpanPassword(Request $request, string $id){
         $request->validate([
             'password' => 'required|min:3|max:12',
             'confirm_password' => 'required|same:password',
         ]);
 
-        User::find($username)->update ([
+        User::find($id)->update ([
             'password' => Hash::make($request->password),
         ]);
         return redirect(route('login'))->with('message', 'Berhasil ubah password, silahkan masuk');
+
     }
 }
